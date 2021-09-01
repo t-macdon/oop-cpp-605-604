@@ -4,9 +4,9 @@
 // Version     : 1.0
 // Copyright   : Your copyright notice
 // Description : This program reads three integer values. The three values are interpreted
-// 					as representing the integer lengths of the sides of a triangle. This program prints a
-// 					message that states whether the triangle is equilateral (three side equal), isosceles
-// 					(two side equal) or scalene (no side equal).
+//   as representing the integer lengths of the sides of a triangle. This program prints a
+// 	 message that states whether the triangle is equilateral (three side equal), isosceles
+//   (two side equal) or scalene (no side equal).
 //============================================================================
 
 #include <iostream>
@@ -24,7 +24,8 @@ int main(int argc, char** argv) {
 	}
 
 
-	// error check: ensure arguments can be cast to doubles
+	// TODO: Some sort of check that these are actually ints and not something like strings
+	//	A try catch won't do the trick because atoi converts chars to ints
 	int side_one = atoi(argv[1]);
 	int side_two = atoi(argv[2]);
 	int side_three = atoi(argv[3]);
