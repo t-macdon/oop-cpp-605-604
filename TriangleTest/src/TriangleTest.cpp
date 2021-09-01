@@ -12,6 +12,16 @@
 #include <iostream>
 using namespace std;
 
+bool is_equilateral(int side_one, int side_two, int side_three)
+{
+	return side_one == side_two && side_one == side_three && side_two == side_three;
+}
+
+bool is_iscoceles(int side_one, int side_two, int side_three)
+{
+	return side_one == side_two || side_one == side_three || side_two == side_three;
+}
+
 int main(int argc, char** argv) {
 	cout << "Welcome to TriangleTest!" << endl;
 
@@ -31,7 +41,7 @@ int main(int argc, char** argv) {
 	int side_three = atoi(argv[3]);
 
 	// equilateral check
-	if ( side_one == side_two && side_one == side_three && side_two == side_three )
+	if ( is_equilateral(side_one, side_two, side_three) )
 	{
 		cout << "Triangle is equilateral." << endl;
 		return 0;
@@ -39,7 +49,7 @@ int main(int argc, char** argv) {
 
 	// isosceles check
 	// we can assume it is not equilateral at this point
-	if ( side_one == side_two || side_one == side_three || side_two == side_three )
+	if ( is_iscoceles(side_one, side_two, side_three) )
 	{
 		cout << "Triangle is isosceles." << endl;
 		return 0;
