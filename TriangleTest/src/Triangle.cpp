@@ -4,7 +4,7 @@
  *  Created on: Sep 1, 2021
  *      Author:
  */
-#include "Triangle.hpp"
+#include "Triangle.h"
 
 /**
  * Constructor

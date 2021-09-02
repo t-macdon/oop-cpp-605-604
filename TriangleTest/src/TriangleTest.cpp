@@ -13,7 +13,7 @@
 #include <array>
 #include <iostream>
 
-#include "Triangle.hpp"
+#include "Triangle.h"
 
 class Triangle;
 
@@ -31,23 +31,33 @@ int main(int argc, char** argv) {
     cout << "Welcome to TriangleTest!" << endl;
 
     // error check: 3 arguments were passed in
-    if ( argc != 4 )
+    if ( argc != Triangle::NUM_SIDES+1 )
     {
-        cout << "ERROR: Expected 3 arguments." << endl;
+        cout << "ERROR: Expected " << Triangle::NUM_SIDES <<" arguments." << endl;
         printUsage();
         return 1;
     }
 
-    // TODO: Some sort of check that these are actually ints and not something like strings
-    //	A try catch won't do the trick because atoi converts chars to ints
     array<int, Triangle::NUM_SIDES> sides;
-
-    int sideOne = stoi(argv[1]);
-    int sideTwo = stoi(argv[2]);
-    int sideThree = stoi(argv[3]);
+    bool errors = false;
+    for(size_t i=0; i<sides.size(); i++) {
+        try {
+            sides[i] = stoi(argv[i+1]);
+            if (sides[i] < 0) {
+                cout << "Invalid length of \"" << argv[i+1] << "\"!" << endl;
+                errors = true;
+            }
+        } catch (...) {
+            cout << "Unable to convert \"" << argv[i+1] << "\" to integer!" << endl;
+            errors = true;
+        }
+    }
+    if (errors) {
+        return -1;
+    }
 
     // create a Triangle object
-    Triangle triangle(sideOne, sideTwo, sideThree);
+    Triangle triangle(sides[0], sides[1], sides[3]);
 
     // print TriangleType to console
     cout << "Triangle is " << triangle.getTriangleTypeAsString() << endl;
