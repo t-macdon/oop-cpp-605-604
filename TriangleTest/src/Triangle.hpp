@@ -8,7 +8,6 @@
 #ifndef TRIANGLE_H_
 #define TRIANGLE_H_
 
-#include <list>
 #include <string>
 
 class Triangle {
