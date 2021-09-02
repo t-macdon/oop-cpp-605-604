@@ -12,7 +12,7 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "Triangle.h"
+#include "Triangle.hpp"
 
 class Triangle;
 
