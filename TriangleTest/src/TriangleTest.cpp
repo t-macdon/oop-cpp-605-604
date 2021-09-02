@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : TriangleTest.cpp
-// Author      : 
+// Author      : Michael Schumacher && Tyler MacDonald
 // Version     : 1.0
 // Copyright   : Your copyright notice
 // Description : This program reads three integer values. The three values are interpreted
@@ -9,18 +9,22 @@
 //   (two side equal) or scalene (no side equal).
 //============================================================================
 
+#include <cstdlib>
 #include <iostream>
+
+#include "Triangle.h"
+
+class Triangle;
+
 using namespace std;
 
-bool is_equilateral(int side_one, int side_two, int side_three)
-{
-	return side_one == side_two && side_one == side_three && side_two == side_three;
+/**
+ * Displays a usage message to the console
+ */
+void printUsage() {
+	cout << "Example Usage: TriangleText.exe 3.4 5 65" << endl;
 }
 
-bool is_iscoceles(int side_one, int side_two, int side_three)
-{
-	return side_one == side_two || side_one == side_three || side_two == side_three;
-}
 
 int main(int argc, char** argv) {
 	cout << "Welcome to TriangleTest!" << endl;
@@ -29,33 +33,22 @@ int main(int argc, char** argv) {
 	if ( argc != 4 )
 	{
 		cout << "ERROR: Expected 3 arguments." << endl;
-		cout << "Example Usage: TriangleText.exe 3.4 5 65" << endl;
+		printUsage();
 		return 1;
 	}
 
-
 	// TODO: Some sort of check that these are actually ints and not something like strings
 	//	A try catch won't do the trick because atoi converts chars to ints
-	int side_one = atoi(argv[1]);
-	int side_two = atoi(argv[2]);
-	int side_three = atoi(argv[3]);
+	int sideOne = atoi(argv[1]);
+	int sideTwo = atoi(argv[2]);
+	int sideThree = atoi(argv[3]);
 
-	// equilateral check
-	if ( is_equilateral(side_one, side_two, side_three) )
-	{
-		cout << "Triangle is equilateral." << endl;
-		return 0;
-	}
+	// create a Triangle object
+	Triangle triangle(sideOne, sideTwo, sideThree);
 
-	// isosceles check
-	// we can assume it is not equilateral at this point
-	if ( is_iscoceles(side_one, side_two, side_three) )
-	{
-		cout << "Triangle is isosceles." << endl;
-		return 0;
-	}
+	// print TriangleType to console
+	cout << "Triangle is " << triangle.getTriangleTypeAsString() << endl;
 
-	// if it's not equilateral or isosceles, it has to be scalene
-	cout << "Triangle is scalene." << endl;
+	cout << "Bye!" << endl;
 	return 0;
 }
