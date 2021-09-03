@@ -21,11 +21,6 @@ Triangle::Triangle(int sideOne, int sideTwo, int sideThree)
 }
 
 /**
- * Destructor
- */
-Triangle::~Triangle() {}
-
-/**
  * Counts the number of matching sides and returns the appropriate triangle type
  *
  * @param sides An array of triangle sides

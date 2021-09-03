@@ -13,8 +13,7 @@
 class Triangle {
 public:
     static const int NUM_SIDES = 3;
-    Triangle(int sidesOne, int sideTwo, int sideThree);
-    virtual ~Triangle();
+    Triangle(int sideOne, int sideTwo, int sideThree);
     std::string getTriangleTypeAsString();
     enum TriangleType {EQUILATERAL, ISOSCELES, SCALENE, UNKNOWN};
 private:
