@@ -54,6 +54,7 @@ int main(int argc, char** argv) {
         }
     }
     if (errors) {
+        printUsage();
         return -1;
     }
 
