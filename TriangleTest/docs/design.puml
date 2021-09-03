@@ -1,0 +1,24 @@
+@startuml TriangleTest Design Diagram
+
+title TriangleTest Design Diagram
+
+class Triangle {
+    + {static} const int NUM_SIDES = 3
+    + enum TriangleType {EQUILATERAL, ISOSCELES, SCALENE, UNKNOWN}
+    - int sides[NUM_SIDES]
+    - TriangleType triangleType
+    __
+    + Triangle(int sideOne, int sideTwo, int sideThree)
+    + std::string getTriangleTypeAsString()
+    - TriangleType determineTriangleType(int sides[])
+}
+
+class TriangleTest {
+    __
+    + int main(int argc, char** argv)
+    + void printUsage()
+}
+
+Triangle -left- TriangleTest
+
+@enduml
