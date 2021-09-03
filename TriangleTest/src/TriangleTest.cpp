@@ -37,16 +37,19 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    // read command line arguments as an integer sides array
     array<int, Triangle::NUM_SIDES> sides;
     bool errors = false;
     for(size_t i=0; i<sides.size(); i++) {
         try {
             sides[i] = stoi(argv[i+1]);
-            if (sides[i] < 0) {
+            // error check: a side cannot have a negative or zero length
+            if (sides[i] <= 0) {
                 cout << "Invalid length of \"" << argv[i+1] << "\"!" << endl;
                 errors = true;
             }
         } catch (...) {
+            // error check: if stoi does not work, then the argument is not a valid number
             cout << "Unable to convert \"" << argv[i+1] << "\" to integer!" << endl;
             errors = true;
         }

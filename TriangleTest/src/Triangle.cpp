@@ -9,7 +9,9 @@
 /**
  * Constructor
  *
- * @param sides An array of triangle sides
+ * @param sideOne A unique side of the triangle
+ * @param sideTwo A unique side of the triangle
+ * @param sideThree A unique side of the triangle
  * @return A Triangle object
  */
 Triangle::Triangle(int sideOne, int sideTwo, int sideThree)
