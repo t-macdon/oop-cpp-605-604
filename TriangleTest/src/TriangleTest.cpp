@@ -2,7 +2,6 @@
 // Name        : TriangleTest.cpp
 // Author      : Michael Schumacher && Tyler MacDonald
 // Version     : 1.0
-// Copyright   : Your copyright notice
 // Description : This program reads three integer values. The three values are interpreted
 //   as representing the integer lengths of the sides of a triangle. This program prints a
 // 	 message that states whether the triangle is equilateral (three side equal), isosceles

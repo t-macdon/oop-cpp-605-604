@@ -2,7 +2,7 @@
  * Triangle.h
  *
  *  Created on: Sep 1, 2021
- *      Author:
+ *      Author: Michael Schumacher && Tyler MacDonald
  */
 
 #ifndef TRIANGLE_H_

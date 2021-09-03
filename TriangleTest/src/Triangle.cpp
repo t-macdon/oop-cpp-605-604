@@ -2,7 +2,7 @@
  * Triangle.cpp
  *
  *  Created on: Sep 1, 2021
- *      Author:
+ *      Author: Michael Schumacher && Tyler MacDonald
  */
 #include "Triangle.h"
 
