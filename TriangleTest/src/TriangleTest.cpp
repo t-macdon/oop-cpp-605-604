@@ -22,9 +22,8 @@ using namespace std;
  * Displays a usage message to the console
  */
 void printUsage() {
-    cout << "Example Usage: TriangleText.exe 3.4 5 65" << endl;
+    cout << "Example Usage: TriangleText.exe 3 5 65" << endl;
 }
-
 
 int main(int argc, char** argv) {
     cout << "Welcome to TriangleTest!" << endl;
