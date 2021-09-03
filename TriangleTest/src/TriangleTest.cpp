@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
     }
 
     // create a Triangle object
-    Triangle triangle(sides[0], sides[1], sides[3]);
+    Triangle triangle(sides[0], sides[1], sides[2]);
 
     // print TriangleType to console
     cout << "Triangle is " << triangle.getTriangleTypeAsString() << endl;
