@@ -38,32 +38,27 @@ int main(int argc, char** argv) {
 
     // read command line arguments as an integer sides array
     array<int, Triangle::NUM_SIDES> sides;
-    bool errors = false;
     for(size_t i=0; i<sides.size(); i++) {
         try {
             sides[i] = stoi(argv[i+1]);
-            // error check: a side cannot have a negative or zero length
-            if (sides[i] <= 0) {
-                cout << "Invalid length of \"" << argv[i+1] << "\"!" << endl;
-                errors = true;
-            }
         } catch (...) {
             // error check: if stoi does not work, then the argument is not a valid number
             cout << "Unable to convert \"" << argv[i+1] << "\" to integer!" << endl;
-            errors = true;
+            printUsage();
+            return -1;
         }
-    }
-    if (errors) {
-        printUsage();
-        return -1;
     }
 
     // create a Triangle object
-    Triangle triangle(sides[0], sides[1], sides[2]);
-
-    // print TriangleType to console
-    cout << "Triangle is " << triangle.getTriangleTypeAsString() << "!" << endl;
-
-    cout << "Bye!" << endl;
-    return 0;
+    try {
+        Triangle triangle(sides);
+        // print TriangleType to console
+        cout << "Triangle is " << triangle.getTriangleTypeAsString() << "!" << endl;
+        cout << "Bye!" << endl;
+        return 0;
+    } catch (std::invalid_argument& e) {
+        cout << e.what() << endl;
+        printUsage();
+        return -1;
+    }
 }

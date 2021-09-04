@@ -5,34 +5,44 @@
  *      Author: Michael Schumacher && Tyler MacDonald
  */
 #include "Triangle.h"
+#include <stdexcept>
 
-/**
- * Constructor
- *
- * @param sideOne A unique side of the triangle
- * @param sideTwo A unique side of the triangle
- * @param sideThree A unique side of the triangle
- * @return A Triangle object
- */
-Triangle::Triangle(int sideOne, int sideTwo, int sideThree)
+Triangle::Triangle(const std::array<int, NUM_SIDES>& sides)
 {
-    this->sides[0] = sideOne;
-    this->sides[1] = sideTwo;
-    this->sides[2] = sideThree;
+    this->sides = sides;
+    // Verify that our sides do create a valid triangle
+    if (!validTriangle(this->sides)) {
+        throw std::invalid_argument("These sides do not create a valid triangle");
+    }
     this->triangleType = determineTriangleType(sides);
 }
 
-/**
- * Counts the number of matching sides and returns the appropriate triangle type
- *
- * @param sides An array of triangle sides
- * @return TriangleType describing the nature of the triangle
- */
-Triangle::TriangleType Triangle::determineTriangleType(int sides[]) {
+
+bool Triangle::validTriangle(const std::array<int, NUM_SIDES>& sides)
+{
+    bool valid = true;
+    // Verify all sides are non-zero and positive
+    valid = (valid
+        && sides[0] > 0
+        && sides[1] > 0
+        && sides[2] > 0
+    );
+
+    // Verify these sides create a real triangle
+    // Uses the Triangle Inequality Thereom
+    valid = (valid 
+        && sides[0] + sides[1] > sides[2]
+        && sides[0] + sides[2] > sides[1]
+        && sides[1] + sides[2] > sides[0]);
+
+    return valid;
+}
+
+Triangle::TriangleType Triangle::determineTriangleType(const std::array<int, NUM_SIDES>& sides) {
 
     // compare all sides and compute how many are matching
     int numMatches = 0;
-    for (unsigned int i = 0; i < Triangle::NUM_SIDES; i++) {
+    for (unsigned int i = 0; i < sides.size(); i++) {
         for (unsigned int j = i + 1; j < Triangle::NUM_SIDES; j++) {
             if (sides[i] == sides[j]) {
                 numMatches += 1;
@@ -52,9 +62,6 @@ Triangle::TriangleType Triangle::determineTriangleType(int sides[]) {
     }
 }
 
-/**
- * @return the std::string representation of the TriangleType
- */
 std::string Triangle::getTriangleTypeAsString() {
     switch(this->triangleType){
         case TriangleType::EQUILATERAL:
