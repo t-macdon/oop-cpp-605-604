@@ -5,12 +5,13 @@ title TriangleTest Design Diagram
 class Triangle {
     + {static} const int NUM_SIDES = 3
     + enum TriangleType {EQUILATERAL, ISOSCELES, SCALENE, UNKNOWN}
-    - int sides[NUM_SIDES]
+    - std::array<int, NUM_SIDES> sides
     - TriangleType triangleType
     __
-    + Triangle(int sideOne, int sideTwo, int sideThree)
+    + Triangle(const std::array<int, NUM_SIDES>& sides)
     + std::string getTriangleTypeAsString()
-    - TriangleType determineTriangleType(int sides[])
+    - {static} TriangleType determineTriangleType(const std::array<int, NUM_SIDES>& sides)
+    - {static} bool validTriangle(const std::array<int, NUM_SIDES>& sides)
 }
 
 class TriangleTest {
