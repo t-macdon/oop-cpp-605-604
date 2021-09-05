@@ -9,6 +9,7 @@
 //============================================================================
 
 #include <cstdlib>
+#include <cmath>
 #include <array>
 #include <iostream>
 
@@ -40,9 +41,16 @@ int main(int argc, char** argv) {
     array<int, Triangle::NUM_SIDES> sides;
     for(size_t i=0; i<sides.size(); i++) {
         try {
-            sides[i] = stoi(argv[i+1]);
+            float inputAsFloat = stof(argv[i+1]);
+            int inputAsInt = trunc(inputAsFloat);
+            if (inputAsFloat != inputAsInt) {
+                cout << "Warning, truncating \"" << 
+                    inputAsFloat  << "\" to \"" << 
+                    inputAsInt << "\"" << endl;
+            }
+            sides[i] = inputAsInt;
         } catch (...) {
-            // error check: if stoi does not work, then the argument is not a valid number
+            // error check: if stof does not work, then the argument is not a valid number
             cout << "Unable to convert \"" << argv[i+1] << "\" to integer!" << endl;
             printUsage();
             return -1;
