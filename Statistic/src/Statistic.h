@@ -26,13 +26,49 @@ public:
     /**
      * @return The running average
      */
-    double average() const;
+    double getAverage() const;
 
     /**
      * @return The standard deviation
      */
-    double STD() const;
+    double getSTD() const;
 
+private:
+
+    /**
+     * @brief Sum of all elements added to this instance
+     */
+    double runningSum;
+
+    /**
+     * @brief Sum of all elements squared and the added to this instance
+     */
+    double runningSumOfSquares;
+
+    /**
+     * @brief The number of elements added to this instance
+     */
+    double numberOfElements;
+
+    /**
+     * @brief The average of all elements added to this instance
+     */
+    double average;
+
+    /**
+     * @brief The standard deviation of all elements added to this instance
+     */
+    double STD;
+
+    /**
+     * @brief Updates the average by dividing runningSum by numberOfElements
+     */
+    void updateAverage();
+
+    /**
+     * @brief Updates the standard deviation
+     */
+    void updateSTD();
 };
 
 #endif
