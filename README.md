@@ -5,6 +5,10 @@ Object Oriented Programming in C++ (JHU 605 604)
 
 See TriangleTest directory
 
+# Module 2
+
+See Statistic directory
+
 # PlantUML
 
 PlantUML is a diagram generation software that runs on Java.
