@@ -13,7 +13,7 @@ CXX        = g++
 CXXFLAGS   = -std=c++11 \
              -Wall -Wextra -Werror -Wpointer-arith -Wcast-qual \
              -pedantic-errors -pedantic \
-			 -g
+             -g
 
 LD         = g++ -o
 LDFLAGS    = -Wall -pedantic
@@ -29,19 +29,19 @@ OBJECTS   := $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 RM         = rm -f
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
-	@$(LD) $@ $(LDFLAGS) $(OBJECTS)
-	@echo "Linking complete!"
+    @$(LD) $@ $(LDFLAGS) $(OBJECTS)
+    @echo "Linking complete!"
 
 $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
-	@$(CXX) $(CXXFLAGS) -c $< -o $@
-	@echo "Compiled "$<" successfully!"
+    @$(CXX) $(CXXFLAGS) -c $< -o $@
+    @echo "Compiled "$<" successfully!"
 
 .PHONY: clean
 clean:
-	@$(RM) $(OBJECTS)
-	@echo "Cleanup complete!"
+    @$(RM) $(OBJECTS)
+    @echo "Cleanup complete!"
 
 .PHONY: remove
 remove: clean
-	@$(RM) $(BINDIR)/$(TARGET)
-	@echo "Executable removed!"
+    @$(RM) $(BINDIR)/$(TARGET)
+    @echo "Executable removed!"
