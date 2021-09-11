@@ -21,19 +21,22 @@ LDFLAGS    = -Wall -pedantic
 SRCDIR     = src
 OBJDIR     = obj
 BINDIR     = bin
+INCTEST    = ../doctest/doctest
+SRCTEST    = ../doctest/doctest/parts
 
 SOURCES   := $(wildcard $(SRCDIR)/*.cpp)
-INCLUDES  := $(wildcard $(SRCDIR)/*.h)
+INCLUDES  := $(SRCDIR)
+INCLUDES  += $(INCTEST)
 OBJECTS   := $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
 RM         = rm -f
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
-	@$(LD) $@ $(LDFLAGS) $(OBJECTS)
+	$(LD) $@ $(LDFLAGS) $(OBJECTS)
 	@echo "Linking complete!"
 
 $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
-	@$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS)  $(INCLUDES:%=-I %) -c $< -o $@
 	@echo "Compiled "$<" successfully!"
 
 .PHONY: clean

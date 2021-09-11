@@ -4,11 +4,11 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
             "name": "GDB - Build and Compile Project",
             "type": "cppdbg",
             "request": "launch",
+            // TODO: See tasks.json, could we make this thing an input?
             "program": "${workspaceFolder}/TriangleTest/bin/TriangleTest",
             "args": [],
             "stopAtEntry": true,
