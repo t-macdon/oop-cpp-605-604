@@ -31,3 +31,6 @@
 *.out
 *.app
 **/bin/*
+
+# Permit any and all .gitkeep files
+!**/.gitkeep
