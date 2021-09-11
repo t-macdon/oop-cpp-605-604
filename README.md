@@ -13,12 +13,10 @@ See Statistic directory
 
 PlantUML is a diagram generation software that runs on Java.
 
-To install the dependencies on Debian, run:
+The following Debian dependencies come pre-installed on the VS Code devcontainer:
+  - default-jdk
+  - graphviz
 
-```
-apt install -y default-jdk graphviz
-```
-
-Then, install the VS Code extension `PlantUML`
+The devcontainer also comes with the VS Code extension `PlantUML` pre-installed (ID of `jebbs.plantuml`).
 
 To see a preview of the diagram as you write your PlantUML file (*.puml), hit `alt+d`
