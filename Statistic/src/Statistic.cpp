@@ -13,7 +13,7 @@ using namespace std;
 
 Statistic::Statistic()
     : runningSum(0), runningSumOfSquares(0), numberOfElements(0),
-        average(0), STD(0)
+        average(NAN), STD(NAN)
 {
 }
 
