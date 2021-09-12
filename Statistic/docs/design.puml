@@ -1,0 +1,16 @@
+
+@startuml Statistic Design Diagram
+
+title Statistic Design Diagram
+
+class Statistic {
+    __
+}
+
+class StatisticTests {
+    __
+}
+
+Statistic -left- StatisticTests
+
+@enduml
