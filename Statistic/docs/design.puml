@@ -4,7 +4,18 @@
 title Statistic Design Diagram
 
 class Statistic {
+    - runningSum : double
+    - runningSumOfSquares : double
+    - numberOfElements : double
+    - average  : double
+    - STD : double
+    - updateAverage()
+    - updateSTD()
     __
+    + Statistic()
+    + add(double)
+    + getAverage() : double
+    + getSTD() : double
 }
 
 class StatisticTests {
