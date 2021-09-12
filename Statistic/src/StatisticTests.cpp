@@ -143,3 +143,12 @@ TEST_CASE("Statistics of Michael Schumacher's discussion numbers") {
     };
     verifyStatisticsMatch(numbers);
 }
+
+TEST_CASE("Statistics of all zeros") {
+    const vector<double> numbers {
+        0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+    verifyStatisticsMatch(numbers);
+}
