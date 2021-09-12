@@ -93,3 +93,23 @@ TEST_CASE("Statistics of Michael Schumacher's discussion numbers") {
     };
     verifyStatisticsMatch(numbers);
 }
+
+TEST_CASE("Statistics of negative numbers") {
+    const std::vector<double> numbers {
+        -31, -543.02234, -234522.2405,
+        -4229.222203, -0.00345, -0.00006,
+        -900234, -9223415, -10, -5001.2304,
+        -340052.200, -6012.42, -19230.43
+    };
+    verifyStatisticsMatch(numbers);
+}
+
+TEST_CASE("Statistics of mixed sign numbers") {
+    const std::vector<double> numbers {
+        -31, -543.02234, -234522.2405,
+        50.12, 12221.32, 12221.3443, 40001.211,
+        -900234, -9223415, -10, -5001.2304,
+        491, 80, 32, 49.91, 48, 389.41, 12.345
+    };
+    verifyStatisticsMatch(numbers);
+}
