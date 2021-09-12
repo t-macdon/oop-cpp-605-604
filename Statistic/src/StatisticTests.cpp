@@ -124,7 +124,7 @@ TEST_CASE("Statistics of mixed sign numbers") {
     verifyStatisticsMatch(numbers);
 }
 
-TEST_CASE("Statistics of Taylor MacDonald's discussion numbers") {
+TEST_CASE("Statistics of Tyler MacDonald's discussion numbers") {
     const vector<double> numbers {
         72, 72, 79, 79, 81, 81, 79, 77, 77,
         76, 76, 74, 74, 72, 79, 79, 77, 77,
