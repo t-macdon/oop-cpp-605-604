@@ -104,26 +104,6 @@ TEST_CASE("Statistics of positive numbers") {
     verifyStatisticsMatch(numbers);
 }
 
-TEST_CASE("Statistics of Taylor MacDonald's discussion numbers") {
-    const vector<double> numbers {
-        72, 72, 79, 79, 81, 81, 79, 77, 77,
-        76, 76, 74, 74, 72, 79, 79, 77, 77,
-        76, 76, 74, 79, 79, 77, 77, 76, 76,
-        74, 72, 72, 79, 79, 81, 81, 79, 77,
-        77, 76, 76, 74, 74, 24
-    };
-    verifyStatisticsMatch(numbers);
-}
-
-TEST_CASE("Statistics of Michael Schumacher's discussion numbers") {
-    const vector<double> numbers {
-        12, 21, 1, 33, 1, 111221111, 12 , 20000,
-        112, 21110, 111111, 10, 21101110, 12, 
-        100000, 11100000,
-    };
-    verifyStatisticsMatch(numbers);
-}
-
 TEST_CASE("Statistics of negative numbers") {
     const vector<double> numbers {
         -31, -543.02234, -234522.2405,
@@ -140,6 +120,26 @@ TEST_CASE("Statistics of mixed sign numbers") {
         50.12, 12221.32, 12221.3443, 40001.211,
         -900234, -9223415, -10, -5001.2304,
         491, 80, 32, 49.91, 48, 389.41, 12.345
+    };
+    verifyStatisticsMatch(numbers);
+}
+
+TEST_CASE("Statistics of Taylor MacDonald's discussion numbers") {
+    const vector<double> numbers {
+        72, 72, 79, 79, 81, 81, 79, 77, 77,
+        76, 76, 74, 74, 72, 79, 79, 77, 77,
+        76, 76, 74, 79, 79, 77, 77, 76, 76,
+        74, 72, 72, 79, 79, 81, 81, 79, 77,
+        77, 76, 76, 74, 74, 24
+    };
+    verifyStatisticsMatch(numbers);
+}
+
+TEST_CASE("Statistics of Michael Schumacher's discussion numbers") {
+    const vector<double> numbers {
+        12, 21, 1, 33, 1, 111221111, 12 , 20000,
+        112, 21110, 111111, 10, 21101110, 12, 
+        100000, 11100000,
     };
     verifyStatisticsMatch(numbers);
 }
