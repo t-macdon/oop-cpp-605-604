@@ -9,17 +9,21 @@ class Statistic {
     - numberOfElements : double
     - average  : double
     - STD : double
-    - updateAverage()
-    - updateSTD()
     __
     + Statistic()
     + add(double)
     + getAverage() : double
     + getSTD() : double
+    - updateAverage()
+    - updateSTD()
 }
 
 class StatisticTests {
     __
+    + calculateMean(vector<double>) : double
+    + calculateStandardDeviation(vector<double>) : double
+    + verifyStasticsMatch(vector<double>)
+    + TEST_CASES[8]
 }
 
 Statistic -left- StatisticTests
