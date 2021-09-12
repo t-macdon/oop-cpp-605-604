@@ -57,6 +57,8 @@ void verifyStatisticsMatch(const vector<double>& numbers) {
     
     CHECK(stat.getAverage() == doctest::Approx(mean));
     CHECK(stat.getSTD() == doctest::Approx(standardDeviation));
+    CHECK_FALSE(isnan(stat.getSTD()));
+    CHECK_FALSE(isnan(stat.getAverage()));
 }
 
 TEST_CASE("Edge Conditions") {
