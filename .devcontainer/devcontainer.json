@@ -16,7 +16,8 @@
 	"extensions": [
 		"ms-vscode.cpptools",
 		"jebbs.plantuml",
-		"streetsidesoftware.code-spell-checker"
+		"streetsidesoftware.code-spell-checker",
+		"cschlosser.doxdocgen"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
