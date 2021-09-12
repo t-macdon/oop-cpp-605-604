@@ -13,11 +13,21 @@
 
 using namespace std;
 
+/**
+ * @brief Calculate the mean of a vector input
+ * @param input test vector to find the mean of
+ * @return double 
+ */
 double calculateMean(const vector<double>& input) {
     double sum = accumulate(input.begin(), input.end(), 0.0);
     return sum/input.size();
 }
 
+/**
+ * @brief Calculate the standard deviation of a vector input
+ * @param input test vector to find the sample standard deviation of
+ * @return double 
+ */
 double calculateStandardDeviation(const vector<double>& input) {
     double mean = calculateMean(input);
     double accumulator = 0.0;
@@ -27,6 +37,15 @@ double calculateStandardDeviation(const vector<double>& input) {
     return sqrt(accumulator/(input.size()-1));
 }
 
+/**
+ * @brief Verify that the Statistic class matches expected behavior
+ * 
+ * Given a vector of values, verify that the mean and standard deviation
+ * calculated from the Statistic class matches the results found with
+ * our local test functions
+ * 
+ * @param numbers Vector of numbers to compare results of
+ */
 void verifyStatisticsMatch(const vector<double>& numbers) {
     double mean = calculateMean(numbers);
     double standardDeviation = calculateStandardDeviation(numbers);
