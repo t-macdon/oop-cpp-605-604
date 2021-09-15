@@ -64,6 +64,19 @@
             "group": "build",
             "detail": "Clean the build environment",
         },
+        {
+            "type": "shell",
+            "label": "Build Doxygen",
+            "command": "doxygen",
+            "options": {
+                "cwd": "${workspaceFolder}/${input:project}"
+            },
+            "presentation": {
+                "reveal": "always",
+            },
+            "group": "build",
+            "detail": "Builds the Doxygen documentation for this task project",
+        },
     ],
     "inputs": [
         {

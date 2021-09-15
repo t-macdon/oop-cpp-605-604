@@ -32,5 +32,8 @@
 *.app
 **/bin/*
 
+# Doxygen generated output
+**/html
+
 # Permit any and all .gitkeep files
 !**/.gitkeep

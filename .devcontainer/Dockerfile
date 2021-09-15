@@ -8,4 +8,5 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
     default-jdk \
     graphviz \
+    doxygen \
     && rm -rf /var/lib/apt/lists/*

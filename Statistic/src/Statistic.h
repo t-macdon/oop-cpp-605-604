@@ -1,13 +1,18 @@
-/*
- * Triangle.h
- *
- *  Created on: Sep 1, 2021
- *      Author: Michael Schumacher && Tyler MacDonald
+/**
+ * @file Statistic.h
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Header file for the Statistic class
+ * @version 0.1
+ * @date 2021-09-15
  */
 
 #ifndef STATISTIC_H
 #define STATISTIC_H
 
+/**
+ * @brief The Statistic class keeps track of general stats of lists
+ * 
+ */
 class Statistic {
 public:
 

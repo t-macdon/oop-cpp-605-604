@@ -1,8 +1,9 @@
-/*
- * main.cpp
- *
- *  Created on: Sep 9, 2021
- *      Author: Michael Schumacher && Tyler MacDonald
+/**
+ * @file StatisticTests.cpp
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Unit tests for the Statistic class
+ * @version 0.1
+ * @date 2021-09-09
  */
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
