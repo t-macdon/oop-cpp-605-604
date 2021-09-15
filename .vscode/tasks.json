@@ -85,10 +85,11 @@
             "type": "pickString",
             "options": [
                 "TriangleTest",
-                "Statistic"
+                "Statistic",
+                "TicTacToe",
             ],
             // Update with the current project as we move forward
-            "default": "Statistic"
+            "default": "TicTacToe"
         }
     ],
     "version": "2.0.0"

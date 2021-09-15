@@ -9,6 +9,10 @@ See TriangleTest directory
 
 See Statistic directory
 
+# Module 3
+
+See TicTacToe directory
+
 # PlantUML
 
 PlantUML is a diagram generation software that runs on Java.
