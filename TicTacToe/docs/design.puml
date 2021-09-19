@@ -1,0 +1,41 @@
+@startuml TicTacToe Design
+
+enum BoardPiece {
+    + X
+    + O
+    + EMPTY
+}
+
+enum BoardWinner {
+    + X
+    + O
+    + TIE
+    + NONE
+}
+
+class Board {
+    - {static} MAX_X {3} : const int
+    - {static} MAX_Y {3} : const int
+    - pieces : std::array<std::array<BoardPiece, MAX_X>, MAX_Y>
+    __
+    + {static} pieceToString(piece : BoardPiece)
+    + Board()
+    + void setPiece(piece : BoardPiece, xPos : int, yPos : int)
+    + BoardPiece getPiece(xPos : int, yPos : int)
+    + std::string toString()
+    + BoardWinner getWinner()
+}
+
+class TicTacToeDriver {
+    __
+    + main()
+    - startGame()
+    - getUserSelection()
+    - getBotSelection()
+}
+
+Board -- BoardPiece
+Board -- BoardWinner
+Board -left- TicTacToeDriver
+
+@enduml
