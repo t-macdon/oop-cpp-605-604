@@ -39,3 +39,74 @@ TEST_CASE("Print a board as a string") {
     ss << " O - X" << endl;
     CHECK(ss.str() == b.toString());
 }
+
+TEST_CASE("Row 1 winner") {
+    Board b;
+    b.setPiece(BoardPiece::X, 0, 0);
+    b.setPiece(BoardPiece::X, 0, 1);
+    b.setPiece(BoardPiece::X, 0, 2);
+    CHECK(b.getWinner() == BoardWinner::X);
+}
+
+TEST_CASE("Row 2 winner") {
+    Board b;
+    b.setPiece(BoardPiece::X, 1, 0);
+    b.setPiece(BoardPiece::X, 1, 1);
+    b.setPiece(BoardPiece::X, 1, 2);
+    CHECK(b.getWinner() == BoardWinner::X);
+}
+
+TEST_CASE("Row 3 winner") {
+    Board b;
+    b.setPiece(BoardPiece::X, 2, 0);
+    b.setPiece(BoardPiece::X, 2, 1);
+    b.setPiece(BoardPiece::X, 2, 2);
+    CHECK(b.getWinner() == BoardWinner::X);
+}
+
+TEST_CASE("Column 1 winner") {
+    Board b;
+    b.setPiece(BoardPiece::X, 0, 0);
+    b.setPiece(BoardPiece::X, 1, 0);
+    b.setPiece(BoardPiece::X, 2, 0);
+    CHECK(b.getWinner() == BoardWinner::X);
+}
+
+TEST_CASE("Column 2 winner") {
+    Board b;
+    b.setPiece(BoardPiece::X, 0, 1);
+    b.setPiece(BoardPiece::X, 1, 1);
+    b.setPiece(BoardPiece::X, 2, 1);
+    CHECK(b.getWinner() == BoardWinner::X);
+}
+
+TEST_CASE("Column 3 winner") {
+    Board b;
+    b.setPiece(BoardPiece::X, 0, 2);
+    b.setPiece(BoardPiece::X, 1, 2);
+    b.setPiece(BoardPiece::X, 2, 2);
+    CHECK(b.getWinner() == BoardWinner::X);
+}
+
+TEST_CASE("Diagonal 1 winner") {
+    Board b;
+    b.setPiece(BoardPiece::X, 0, 0);
+    b.setPiece(BoardPiece::X, 1, 1);
+    b.setPiece(BoardPiece::X, 2, 2);
+    CHECK(b.getWinner() == BoardWinner::X);
+}
+
+TEST_CASE("Diagonal 2 winner") {
+    Board b;
+    b.setPiece(BoardPiece::X, 2, 0);
+    b.setPiece(BoardPiece::X, 1, 1);
+    b.setPiece(BoardPiece::X, 0, 2);
+    CHECK(b.getWinner() == BoardWinner::X);
+}
+
+TEST_CASE("Set piece on populated grid coordinate") {
+    Board b;
+    CHECK(b.setPiece(BoardPiece::X, 0, 0));
+    CHECK(!b.setPiece(BoardPiece::X, 0, 0));
+    CHECK(!b.setPiece(BoardPiece::O, 0, 0));
+}
