@@ -1,4 +1,13 @@
-#include <iostream>
+/**
+ * @file UnitTestMain.cpp
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Collection of unit tests.
+ * @version 0.1
+ * @date 2021-09-16
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
 
 #if defined(RUN_UNIT_TESTS) && RUN_UNIT_TESTS
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN

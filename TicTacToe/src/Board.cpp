@@ -1,3 +1,14 @@
+/**
+ * @file Board.cpp
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Implementation for the Board class
+ * @version 0.1
+ * @date 2021-09-16
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
+
 #include <exception>
 #include <string>
 #include <sstream>
