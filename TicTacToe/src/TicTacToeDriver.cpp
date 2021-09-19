@@ -15,6 +15,7 @@
 
 using namespace std;
 
+#if !defined(RUN_UNIT_TESTS) && !RUN_UNIT_TESTS
 int main()
 {
     cout << "Welcome to TicTacToe!" << endl;
@@ -53,3 +54,4 @@ int main()
     cout << "Thanks for playing TicTacToe!" << endl;
     return 0;
 }
+#endif
