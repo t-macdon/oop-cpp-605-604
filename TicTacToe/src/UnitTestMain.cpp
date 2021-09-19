@@ -26,16 +26,16 @@ TEST_CASE("Print a board as a string") {
     b.setPiece(BoardPiece::X, 0, 0);
     b.setPiece(BoardPiece::X, 1, 1);
     b.setPiece(BoardPiece::X, 2, 2);
-    ss << " X    " << endl;
-    ss << "   X  " << endl;
-    ss << "     X" << endl;
+    ss << " X - -" << endl;
+    ss << " - X -" << endl;
+    ss << " - - X" << endl;
     CHECK(ss.str() == b.toString());
     ss.str(string()); // Clear out the string stream
     b.setPiece(BoardPiece::O, 1, 0);
     b.setPiece(BoardPiece::O, 2, 1);
     b.setPiece(BoardPiece::O, 0, 2);
-    ss << " X O  " << endl;
-    ss << "   X O" << endl;
-    ss << " O   X" << endl;
+    ss << " X O -" << endl;
+    ss << " - X O" << endl;
+    ss << " O - X" << endl;
     CHECK(ss.str() == b.toString());
 }
