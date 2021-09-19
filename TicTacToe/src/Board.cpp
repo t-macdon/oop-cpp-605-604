@@ -124,27 +124,29 @@ BoardWinner Board::getWinner(void) const {
     for (int i = 0; i < 3; i++)
     {
         // check ith row
-        if (pieces[i][0] == pieces[i][1] && pieces[i][1] == pieces[i][2])
+        if (getPiece(i, 0) == getPiece(i, 1) && getPiece(i, 1) == getPiece(i, 2))
         {
             return pieceToWinner(pieces[i][0]);
         }
 
         // check ith column
-        if (pieces[0][i] == pieces[1][i] && pieces[1][i] == pieces[2][i])
+        if (getPiece(0, i) == getPiece(1, i) && getPiece(1, i) == getPiece(2, i))
         {
-            return pieceToWinner(pieces[0][i]);
+            return pieceToWinner(getPiece(0, i));
         }
     }
 
     // check diagonals
     if (pieces[0][0] == pieces[1][1] && pieces[1][1] == pieces[2][2])
     {
-        return pieceToWinner(pieces[0][0]);
+    if (getPiece(0, 0) == getPiece(1, 1) && getPiece(1, 1) == getPiece(2, 2))
+        return pieceToWinner(getPiece(0, 0));
     }
 
     if (pieces[2][0] == pieces[1][1] && pieces[1][1] == pieces[0][2])
     {
-        return pieceToWinner(pieces[2][0]);
+    if (getPiece(2, 0) == getPiece(1, 1) && getPiece(1, 1) == getPiece(0, 2))
+        return pieceToWinner(getPiece(2, 0));
     }
 
     // Tie is had when all grids are filled
@@ -155,7 +157,7 @@ BoardWinner Board::getWinner(void) const {
     {   
         for (int y = 0; y < 3; y++)
         {
-            if (pieces[x][y] == BoardPiece::EMPTY)
+            if (getPiece(x, y) == BoardPiece::EMPTY)
             {
                 return BoardWinner::NONE;
             }
