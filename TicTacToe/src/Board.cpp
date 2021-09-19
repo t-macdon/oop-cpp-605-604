@@ -24,7 +24,7 @@ void Board::setPiece(BoardPiece piece, int xPos, int yPos)
 
     // TODO: Do we want to check what's there first?
     // Or leave it up to the caller to enforce legal moves
-    this->pieces[xPos][yPos] = piece;
+    this->pieces[yPos][xPos] = piece;
 }
 
 
@@ -36,18 +36,18 @@ BoardPiece Board::getPiece(int xPos, int yPos) const
         return BoardPiece::EMPTY;
     }
 
-    return this->pieces[xPos][yPos];
+    return this->pieces[yPos][xPos];
 }
 
-// TODO
 string Board::toString(void) const
 {
     stringstream out;
-    out << "  |   |   |   |   ";
-    out << "--+---+---+---+---";
-    out << "  |   |   |   |   ";
-    out << "--+---+---+---+---";
-    out << "  |   |   |   |   ";
+    for(auto row: this->pieces) {
+        for(auto piece: row) {
+            out << " " << pieceToString(piece);
+        }
+        out << endl;
+    }
     return out.str();
 }
 
@@ -63,4 +63,17 @@ string Board::pieceToString(BoardPiece piece)
     else {
         return " ";
     }
+}
+
+BoardWinner Board::getWinner(void) const {
+    // Check for a winner by rows
+
+    // Check for a winner by columns
+
+    // Check for a winner by verticals
+
+    // Tie is had when all grids are filled
+    // yet no one has a winning combination
+
+    return BoardWinner::NONE;
 }

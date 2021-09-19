@@ -15,6 +15,8 @@ CXXFLAGS   = -std=c++11 \
 			 -pedantic-errors -pedantic \
 			 -g
 
+CXXFLAGS += -DRUN_UNIT_TESTS
+
 LD         = g++ -o
 LDFLAGS    = -Wall -pedantic
 
