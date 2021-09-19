@@ -51,8 +51,10 @@ public:
      * @param piece State to set this position
      * @param xPos X position of the piece
      * @param yPos Y position of the piece 
+     * 
+     * @return bool True if coordinate piece is None, False otherwise
      */
-    void setPiece(BoardPiece piece, int xPos, int yPos);
+    bool setPiece(BoardPiece piece, int xPos, int yPos);
 
     /**
      * @brief Get the value of a position on the board
@@ -77,6 +79,20 @@ public:
      * @return BoardWinner X, O, TIE, or NONE depending on winner.
      */
     BoardWinner getWinner(void) const;
+    
+    /**
+     * @brief Get the string representation for a board winner
+     * 
+     * @param winner Winner to represent
+     * @return std::string 
+     */
+    static std::string winnerToString(BoardWinner winner);
+
+    /**
+     * @brief Updates the board with a piece placed by the computer bot player
+     * 
+     */
+    void playBotTurn();
 
 private:
     /**
@@ -102,6 +118,14 @@ private:
      * @return std::string 
      */
     static std::string pieceToString(BoardPiece piece);
+
+    /**
+     * @brief Get the associated winner for the provided piece
+     * 
+     * @param piece Piece to decide winner for
+     * @return BoardWinner 
+     */
+    static BoardWinner pieceToWinner(BoardPiece piece);
 
 };  // End of Board class
 

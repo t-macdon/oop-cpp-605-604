@@ -15,7 +15,7 @@ Board::Board() :
         ;
     }
 
-void Board::setPiece(BoardPiece piece, int xPos, int yPos)
+bool Board::setPiece(BoardPiece piece, int xPos, int yPos)
 {
     // Confirm X, Y are in range
     if (xPos > MAX_X || yPos > MAX_Y) {
@@ -24,7 +24,13 @@ void Board::setPiece(BoardPiece piece, int xPos, int yPos)
 
     // TODO: Do we want to check what's there first?
     // Or leave it up to the caller to enforce legal moves
-    this->pieces[yPos][xPos] = piece;
+    if (this->pieces[yPos][xPos] == BoardPiece::EMPTY)
+    {
+        this->pieces[yPos][xPos] = piece;
+        return true;
+    }
+
+    return false;
 }
 
 
@@ -61,19 +67,100 @@ string Board::pieceToString(BoardPiece piece)
         return "O";
     }
     else {
-        return " ";
+        return "-";
+    }
+}
+
+
+string Board::winnerToString(BoardWinner piece)
+{
+    if (BoardWinner::X == piece) {
+        return "X";
+    }
+    else if (BoardWinner::O == piece) {
+        return "O";
+    }
+    else {
+        return "NONE";
+    }
+}
+
+void Board::playBotTurn()
+{
+    // our smart AI chooses the first available piece
+    // nothing will be changed if there are no empty pieces
+    for (int x = 0; x < 3; x++)
+    {
+        for (int y = 0; y < 3; y++)
+        {
+            if (this->pieces[y][x] == BoardPiece::EMPTY)
+            {
+                this->pieces[y][x] = BoardPiece::O;
+                return;
+            }
+        }
+    }
+}
+
+BoardWinner Board::pieceToWinner(BoardPiece piece)
+{
+
+    if (piece == BoardPiece::X)
+    {
+        return BoardWinner::X;
+    } else if (piece == BoardPiece::O)
+    {
+        return BoardWinner::O;
+    } else
+    {
+        return BoardWinner::NONE;
     }
 }
 
 BoardWinner Board::getWinner(void) const {
-    // Check for a winner by rows
+    // Iterate over the board
+    // check each row for a winner
+    // check each column for a winner
+    for (int i = 0; i < 3; i++)
+    {
+        // check ith row
+        if (pieces[i][0] == pieces[i][1] && pieces[i][1] == pieces[i][2])
+        {
+            return pieceToWinner(pieces[i][0]);
+        }
 
-    // Check for a winner by columns
+        // check ith column
+        if (pieces[0][i] == pieces[1][i] && pieces[1][i] == pieces[2][i])
+        {
+            return pieceToWinner(pieces[0][i]);
+        }
+    }
 
-    // Check for a winner by verticals
+    // check diagonals
+    if (pieces[0][0] == pieces[1][1] && pieces[1][1] == pieces[2][2])
+    {
+        return pieceToWinner(pieces[0][0]);
+    }
+
+    if (pieces[2][0] == pieces[1][1] && pieces[1][1] == pieces[0][2])
+    {
+        return pieceToWinner(pieces[2][0]);
+    }
 
     // Tie is had when all grids are filled
     // yet no one has a winning combination
+    // if any of the pieces are EMPTY then return NONE
+    // if none are EMPTY then we have a tie
+    for (int x = 0; x < 3; x++)
+    {   
+        for (int y = 0; y < 3; y++)
+        {
+            if (pieces[x][y] == BoardPiece::EMPTY)
+            {
+                return BoardWinner::NONE;
+            }
+        }
+    }
 
-    return BoardWinner::NONE;
+    return BoardWinner::TIE;
 }
