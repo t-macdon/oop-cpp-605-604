@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             // TODO: See tasks.json, could we make this thing an input?
-            "program": "${workspaceFolder}/TriangleTest/bin/TriangleTest",
+            "program": "${workspaceFolder}/TicTacToe/bin/TicTacToe",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${fileDirname}",
@@ -23,7 +23,6 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++ Makefile Build",
             "miDebuggerPath": "/usr/bin/gdb"
         }
     ]
