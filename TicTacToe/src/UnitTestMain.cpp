@@ -119,3 +119,20 @@ TEST_CASE("Set piece on populated grid coordinate") {
     CHECK(!b.setPiece(BoardPiece::X, 0, 0));
     CHECK(!b.setPiece(BoardPiece::O, 0, 0));
 }
+
+TEST_CASE("Tie game") {
+    Board b;
+
+    // tie game
+    b.setPiece(BoardPiece::X, 0, 0);
+    b.setPiece(BoardPiece::O, 1, 0);
+    b.setPiece(BoardPiece::X, 2, 0);
+    b.setPiece(BoardPiece::O, 0, 1);
+    b.setPiece(BoardPiece::X, 1, 1);
+    b.setPiece(BoardPiece::O, 2, 1);
+    b.setPiece(BoardPiece::O, 0, 2);
+    b.setPiece(BoardPiece::X, 1, 2);
+    b.setPiece(BoardPiece::O, 2, 2);
+
+    CHECK(b.getWinner() == BoardWinner::TIE);
+}
