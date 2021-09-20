@@ -25,6 +25,10 @@ enum class BoardPiece {
     EMPTY
 };
 
+/**
+ * @brief This class captures all valid winner conditions for the game
+ * 
+ */
 enum class BoardWinner {
     X,
     O,
