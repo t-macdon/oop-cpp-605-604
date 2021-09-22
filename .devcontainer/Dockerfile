@@ -9,4 +9,5 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     default-jdk \
     graphviz \
     doxygen \
+    libjsoncpp-dev \
     && rm -rf /var/lib/apt/lists/*
