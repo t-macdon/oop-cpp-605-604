@@ -1,7 +1,7 @@
 /**
  * @file Card.h
  * @author Michael Schumacher, Tyler MacDonald
- * @brief 
+ * @brief Interface for the Card class
  * @version 0.1
  * @date 2021-09-22
  */
@@ -10,30 +10,29 @@
 #define CARD_H
 
 #include <string>
+#include "CardValue.h"
 
 class Card {
-    enum class Suit {
-        HEART,
-        DIAMOND,
-        CLUB,
-        SPADE,
-    };
-
     public:
-        bool operator==(const Card& card);
-        bool operator>(const Card& card);
-        bool operator<(const Card& card);
-
+        enum class Suit {
+            HEART,
+            DIAMOND,
+            CLUB,
+            SPADE,
+        };
+        Card(std::string);
         Suit getSuit() const;
-        char getValue() const;
-        void setValue(char value);
+        CardValue getValue() const;
+        void setValue(CardValue value);
+        int operator-(const Card& v1) const;
+        bool operator==(const Card& v1) const;
+        bool operator!=(const Card& v1) const;
     private:
         static std::string suitToString(Suit suit);
         static Suit stringToSuit(std::string str);
 
+        CardValue value;
         Suit suit;
-        char value;
-        // Add in >, <, = operators
 };
 
 #endif // end of CARD_H

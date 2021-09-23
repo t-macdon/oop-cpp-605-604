@@ -6,6 +6,7 @@
  * @date 2021-09-22
  */
 
+#include <stdexcept>
 #include <string>
 #include "Card.h"
 
@@ -34,31 +35,67 @@ string Card::suitToString(Card::Suit suit) {
     return suitAsString;
 }
 
+Card::Suit Card::stringToSuit(string str) {
+    // Convert string to a lower-case representation
+    for (auto& c : str) {
+        c = tolower(c);
+    }
+
+    if (str.find("h") != string::npos ||
+        str.find("heart") != string::npos) {
+        return Suit::HEART;
+    }
+
+    if (str.find("d") != string::npos ||
+        str.find("diamond") != string::npos) {
+        return Suit::DIAMOND;
+    }
+
+    if (str.find("c") != string::npos ||
+        str.find("club") != string::npos) {
+        return Suit::CLUB;
+    }
+
+    if (str.find("s") != string::npos ||
+        str.find("spade") != string::npos) {
+        return Suit::SPADE;
+    }
+
+    // If we made it this far, we failed to convert.
+    throw runtime_error("invalid string supplied");
+
+}
 
 Card::Suit Card::getSuit() const {
     return this->suit;
 }
 
-void Card::setValue(char value) {
-    // Force the lowercase version of all values
-    value = tolower(value);
-    // TODO: Actually probably worth pushing this off to a separate class
-    // How do we represent 10 with char?
-    // Comparison of them would be nicely contained in a class.
+void Card::setValue(CardValue value) {
+    this->value = CardValue(value);
 }
 
-char Card::getValue() const {
+CardValue Card::getValue() const {
     return this->value;
 }
 
-bool Card::operator==(const Card& card) {
-    return this->getValue() == card.getValue();
+Card::Card(string str) : 
+    value{str},
+    suit{stringToSuit(str)}
+{
 }
 
-bool Card::operator>(const Card& card) {
-
+int Card::operator-(const Card& v1) const {
+    return (this->getValue() - v1.getValue());
 }
 
-bool Card::operator<(const Card& card) {
+bool Card::operator==(const Card& v1) const {
+    // Trivial case, same object
+    if (this == &v1) {
+        return true;
+    }
+    return (this->getValue() == v1.getValue());
+}
 
+bool Card::operator!=(const Card& v1) const {
+    return !(*this == v1);
 }

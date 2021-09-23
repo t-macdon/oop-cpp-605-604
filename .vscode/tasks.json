@@ -87,9 +87,10 @@
                 "TriangleTest",
                 "Statistic",
                 "TicTacToe",
+                "PokerRanking",
             ],
             // Update with the current project as we move forward
-            "default": "TicTacToe"
+            "default": "PokerRanking"
         }
     ],
     "version": "2.0.0"

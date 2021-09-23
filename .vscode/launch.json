@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             // TODO: See tasks.json, could we make this thing an input?
-            "program": "${workspaceFolder}/TicTacToe/bin/TicTacToe",
+            "program": "${workspaceFolder}/PokerRanking/bin/PokerRanking",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${fileDirname}",
