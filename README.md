@@ -24,3 +24,18 @@ The following Debian dependencies come pre-installed on the VS Code devcontainer
 The devcontainer also comes with the VS Code extension `PlantUML` pre-installed (ID of `jebbs.plantuml`).
 
 To see a preview of the diagram as you write your PlantUML file (*.puml), hit `alt+d`
+
+# JSONCPP
+
+JSONCPP is a popular library used to read JSON files.
+
+To build and install, run the following commands from the JSONCPP directory:
+
+```
+cmake -S . -B build
+cd build
+make
+sudo make install
+```
+
+To use, just include `<json/json.h>`
