@@ -12,6 +12,20 @@
 
 using namespace std;
 
+/**
+ * @brief Checks if a file can be accessed.
+ * @ref StackOverflow "https://stackoverflow.com/a/19841704"
+ * 
+ * @param filepath Path to file to check
+ * @return true
+ * @return false 
+ */
+bool isFileAccessible(std::string filepath)
+{
+    std::ifstream f(filepath);
+    return f.good();
+}
+
 int main(int argc, char *argv[])
 {
     // get the json filepath from args
@@ -23,6 +37,13 @@ int main(int argc, char *argv[])
 
     // save json filepath in string
     string jsonFilepath(argv[1]);
+    
+    // confirm file can be accessed
+    if (!isFileAccessible(jsonFilepath))
+    {
+        cout << "Provided filepath cannot be accessed: \"" << jsonFilepath << "\"" << endl;
+        return 1; 
+    }
 
     // read in the json file
     Json::Value root;
