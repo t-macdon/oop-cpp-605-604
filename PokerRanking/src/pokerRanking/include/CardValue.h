@@ -46,6 +46,8 @@ class CardValue {
         bool operator==(const CardValue& v1) const;
         bool operator!=(const CardValue& v1) const;
 
+        std::string toString();
+
         // How would the "hand checker" look? 
         // Do we need to sort the hand before looking for highest scores?
         // If so, we probably need to implement >, < operators.

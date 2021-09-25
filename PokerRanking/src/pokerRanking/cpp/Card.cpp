@@ -6,6 +6,7 @@
  * @date 2021-09-22
  */
 
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include "Card.h"
@@ -68,6 +69,13 @@ Card::Suit Card::stringToSuit(string str) {
 
 Card::Suit Card::getSuit() const {
     return this->suit;
+}
+
+std::string Card::toString() const {
+    std::stringstream ss;
+    ss << getValue().toString();
+    ss << suitToString(getSuit());
+    return ss.str();
 }
 
 void Card::setValue(CardValue value) {

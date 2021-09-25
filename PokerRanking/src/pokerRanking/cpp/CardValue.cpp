@@ -66,6 +66,27 @@ CardValue::Value CardValue::stringToValue(string str) {
     throw runtime_error("invalid string supplied");
 }
 
+std::string CardValue::toString()
+{
+    switch(value)
+    {
+        case Value::ACE: return "A";
+        case Value::KING: return "K";
+        case Value::QUEEN: return "Q";
+        case Value::JACK: return "J";
+        case Value::TEN: return "10";
+        case Value::NINE: return "9";
+        case Value::EIGHT: return "8";
+        case Value::SEVEN: return "7";
+        case Value::SIX: return "6";
+        case Value::FIVE: return "5";
+        case Value::FOUR: return "4";
+        case Value::THREE: return "3";
+        case Value::TWO: return "2";
+        default: return "?";
+    }
+}
+
 CardValue::CardValue(std::string str) {
     value = stringToValue(str);
 }

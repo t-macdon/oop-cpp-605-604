@@ -1,7 +1,7 @@
 #ifndef HAND_H
 #define HAND_H
 
-#include <array>
+#include <vector>
 #include <string>
 
 #include "Card.h"
@@ -12,8 +12,10 @@ public:
     Hand();
     static const int HAND_SIZE = 5;
     std::string toString();
+    bool addCard(Card card);
+    Card getCard(int i);
 private:
-    std::array<Card, HAND_SIZE> handArray;
+    std::vector<Card> handVector;
 };
 
 #endif

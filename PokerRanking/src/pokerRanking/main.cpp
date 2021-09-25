@@ -10,9 +10,10 @@
 #include <iostream>
 #include <json/json.h>
 
-using namespace std;
+#include "Card.h"
+#include "Hand.h"
 
-static const int HAND_SIZE = 5;
+using namespace std;
 
 /**
  * @brief Checks if a file can be accessed.
@@ -38,7 +39,7 @@ bool isJsonKeyNull(Json::Value value, std::string key)
     return false;
 }
 
-bool populateHandArray(Json::Value value, array<string, HAND_SIZE> &handArray)
+bool populateHandArray(Json::Value value, array<string, Hand::HAND_SIZE> &handArray)
 {
     // confirm it's an array
     if (!value.isArray())
@@ -55,20 +56,6 @@ bool populateHandArray(Json::Value value, array<string, HAND_SIZE> &handArray)
     }
 
     return true;
-}
-
-void printHand(array<string, HAND_SIZE> &hand)
-{
-    cout << "[";
-    for (unsigned int i = 0; i < hand.size(); i++)
-    {
-        cout << hand[i];
-        if (i != hand.size() - 1)
-        {
-            cout << ", ";
-        }
-    }
-    cout << "]" << endl;
 }
 
 int main(int argc, char *argv[])
@@ -138,35 +125,58 @@ int main(int argc, char *argv[])
 
         // iterate over and test each case
         Json::Value::iterator casesIterator;
+        int testCount = 0;
         for (casesIterator = cases.begin(); casesIterator != cases.end(); casesIterator++)
         {
+            testCount++;
+            cout << "Test Number: " << testCount << endl;
+            
             // get and verify handOne
-            Json::Value handOne = casesIterator->get("handOne", Json::Value::null);
-            if (isJsonKeyNull(handOne, "handOne"))
+            Json::Value handOneRoot = casesIterator->get("handOne", Json::Value::null);
+            if (isJsonKeyNull(handOneRoot, "handOne"))
             {
                 return 1;
             }
 
-            array<string, HAND_SIZE> handOneArray;
-            if (!populateHandArray(handOne, handOneArray))
+            // populate hand one
+            Json::ArrayIndex index;
+            Hand handOne;
+            for (index = 0; index < handOneRoot.size(); index++)
             {
-                return 1;
+                Json::Value cardRoot = handOneRoot.get(index, Json::Value::null);
+                if (cardRoot == Json::Value::null)
+                {
+                    cout << "Card Root for index " << index << " is null" << endl;
+                    return 1;
+                }
+                string cardString = cardRoot.asString();
+                Card card(cardString);
+                handOne.addCard(card);
             }
-            printHand(handOneArray);
+            cout << "Hand One: " << handOne.toString() << endl;
 
             // get and verify handTwo
-            Json::Value handTwo = casesIterator->get("handTwo", Json::Value::null);
-            if (isJsonKeyNull(handTwo, "handTwo"))
+            Json::Value handTwoRoot = casesIterator->get("handTwo", Json::Value::null);
+            if (isJsonKeyNull(handTwoRoot, "handTwo"))
             {
                 return 1;
             }
 
-            array<string, HAND_SIZE> handTwoArray;
-            if (!populateHandArray(handTwo, handTwoArray))
+            // populate hand two
+            Hand handTwo;
+            for (index = 0; index < handTwoRoot.size(); index++)
             {
-                return 1;
+                Json::Value cardRoot = handTwoRoot.get(index, Json::Value::null);
+                if (cardRoot == Json::Value::null)
+                {
+                    cout << "Card Root for index " << index << " is null" << endl;
+                    return 1;
+                }
+                string cardString = cardRoot.asString();
+                Card card(cardString);
+                handTwo.addCard(card);
             }
-            printHand(handTwoArray);
+            cout << "Hand Two: " << handTwo.toString() << endl;
         }
     }
 

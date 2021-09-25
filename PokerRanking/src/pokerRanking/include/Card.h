@@ -23,6 +23,7 @@ class Card {
         Card(std::string);
         Suit getSuit() const;
         CardValue getValue() const;
+        std::string toString() const;
         void setValue(CardValue value);
         int operator-(const Card& v1) const;
         bool operator==(const Card& v1) const;
