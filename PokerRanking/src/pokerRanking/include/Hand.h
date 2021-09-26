@@ -36,7 +36,6 @@ public:
 
 private:
     void determineCategory();
-    void determineScore();
     bool isFlush();
     bool isStraight();
     bool isFourOfAKind();
@@ -49,13 +48,13 @@ private:
 
     int compareTo(const Hand& v1) const;
 
+    int getScore() const;
+
     CardValue getHighCardValue() const;
 
     std::vector<Card> handVector;
     std::map<Card, int> pairCounter;
     Category category = Category::INCOMPLETE;
-
-    int score = 0;
 };
 
 #endif

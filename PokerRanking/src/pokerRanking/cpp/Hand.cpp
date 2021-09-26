@@ -54,7 +54,6 @@ bool Hand::addCard(Card card)
     if (handVector.size() == HAND_SIZE)
     {
         determineCategory();
-        determineScore();
     }
     return true;
 }
@@ -215,14 +214,6 @@ void Hand::determineCategory()
     category = Category::HIGH_CARD;
 }
 
-void Hand::determineScore()
-{
-    if (category == Category::STRAIGHT || category == Category::FLUSH)
-    {
-        score = getHighCardValue().getValue();
-    }
-}
-
 Card Hand::getCard(int i) const
 {
     return handVector.at(i);
@@ -252,7 +243,16 @@ int Hand::compareTo(const Hand& v1) const
         return 1;
     } else
     {
-        return 0;
+        if (getScore() < v1.getScore())
+        {
+            return -1;
+        } else if (getScore() > v1.getScore())
+        {
+            return 1;
+        } else
+        {
+            return 0;
+        }
     }
 }
 
@@ -293,4 +293,10 @@ bool Hand::operator==(const Hand& v1) const
 Hand::Category Hand::getCategory() const
 {
     return category;
+}
+
+int Hand::getScore() const
+{
+    int score = (int) category + (int) getHighCardValue().getValue();
+    return score;
 }
