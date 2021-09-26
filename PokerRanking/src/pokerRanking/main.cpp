@@ -125,12 +125,8 @@ int main(int argc, char *argv[])
 
         // iterate over and test each case
         Json::Value::iterator casesIterator;
-        int testCount = 0;
         for (casesIterator = cases.begin(); casesIterator != cases.end(); casesIterator++)
-        {
-            testCount++;
-            cout << "Test Number: " << testCount << endl;
-            
+        {            
             // get and verify handOne
             Json::Value handOneRoot = casesIterator->get("handOne", Json::Value::null);
             if (isJsonKeyNull(handOneRoot, "handOne"))
@@ -153,7 +149,6 @@ int main(int argc, char *argv[])
                 Card card(cardString);
                 handOne.addCard(card);
             }
-            cout << "Hand One: " << handOne.toString() << endl;
 
             // get and verify handTwo
             Json::Value handTwoRoot = casesIterator->get("handTwo", Json::Value::null);
@@ -176,7 +171,18 @@ int main(int argc, char *argv[])
                 Card card(cardString);
                 handTwo.addCard(card);
             }
-            cout << "Hand Two: " << handTwo.toString() << endl;
+
+            // compare hands
+            if (handOne > handTwo)
+            {
+                cout << handOne.toString() << " ranks higher than " << handTwo.toString() << endl;
+            } else if (handTwo > handOne)
+            {
+                cout << handTwo.toString() << " ranks higher than " << handOne.toString() << endl;
+            } else
+            {
+                cout << handOne.toString() << " and " << handTwo.toString() << " are of equal rank" << endl;
+            }
         }
     }
 

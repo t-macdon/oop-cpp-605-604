@@ -16,7 +16,7 @@ Hand::Hand() : handVector(), pairCounter()
 {
 }
 
-std::string Hand::toString()
+std::string Hand::toString() const
 {
     std::stringstream ss;
     ss << "[";
@@ -29,43 +29,6 @@ std::string Hand::toString()
         }
     }
     ss << "]";
-
-    // now add category
-    std::string categoryString;
-    switch (category)
-    {
-        case Category::STRAIGHT_FLUSH: 
-            categoryString = "STRAIGHT_FLUSH";
-            break;
-        case Category::FULL_HOUSE: 
-            categoryString = "FULL_HOUSE";
-            break;
-        case Category::FLUSH: 
-            categoryString = "FLUSH";
-            break;
-        case Category::STRAIGHT: 
-            categoryString = "STRAIGHT";
-            break;
-        case Category::FOUR_OF_A_KIND: 
-            categoryString = "FOUR_OF_A_KIND";
-            break;
-        case Category::THREE_OF_A_KIND: 
-            categoryString = "THREE_OF_A_KIND";
-            break;
-        case Category::TWO_OF_A_KIND: 
-            categoryString = "TWO_OF_A_KIND";
-            break;
-        case Category::TWO_PAIR: 
-            categoryString = "TWO_PAIR";
-            break;
-        case Category::HIGH_CARD: 
-            categoryString = "HIGH_CARD";
-            break;
-        case Category::INCOMPLETE: 
-            categoryString = "INCOMPLETE";
-            break;
-    }
-    ss << ", category=" << categoryString;
 
     return ss.str();
 }
@@ -91,6 +54,7 @@ bool Hand::addCard(Card card)
     if (handVector.size() == HAND_SIZE)
     {
         determineCategory();
+        determineScore();
     }
     return true;
 }
@@ -251,7 +215,71 @@ void Hand::determineCategory()
     category = Category::HIGH_CARD;
 }
 
-Card Hand::getCard(int i)
+void Hand::determineScore()
 {
-    return handVector[i];
+    if (category == Category::STRAIGHT || category == Category::FLUSH)
+    {
+        score = getHighCardValue().getValue();
+    }
+}
+
+Card Hand::getCard(int i) const
+{
+    return handVector.at(i);
+}
+
+CardValue Hand::getHighCardValue() const
+{
+    CardValue highest = CardValue::TWO;
+    for (unsigned int i = 0; i < handVector.size(); i++)
+    {
+        CardValue value = handVector.at(i).getValue();
+        if (value > highest)
+        {
+            highest = value;
+        }
+    }
+    return highest;
+}
+
+int Hand::compareTo(const Hand& v1) const
+{
+    if (category < v1.getCategory())
+    {
+        return -1;
+    } else if (category > v1.getCategory())
+    {
+        return 1;
+    } else
+    {
+        return 0;
+    }
+}
+
+
+bool Hand::operator<(const Hand& v1) const
+{
+    if (compareTo(v1) == -1)
+    {
+        return true;
+    } else
+    {
+        return false;
+    }
+}
+
+bool Hand::operator>(const Hand& v1) const
+{
+    if (compareTo(v1) == 1)
+    {
+        return true;
+    } else
+    {
+        return false;
+    }
+}
+
+Hand::Category Hand::getCategory() const
+{
+    return category;
 }
