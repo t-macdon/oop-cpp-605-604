@@ -32,8 +32,7 @@ public:
 
     bool operator<(const Hand& v1) const;
     bool operator>(const Hand& v1) const;
-    bool operator=(const Hand& v1) const;
-    bool operator!=(const Hand& v1) const;
+    bool operator==(const Hand& v1) const;
 
 private:
     void determineCategory();

@@ -176,10 +176,7 @@ int main(int argc, char *argv[])
             if (handOne > handTwo)
             {
                 cout << handOne.toString() << " ranks higher than " << handTwo.toString() << endl;
-            } else if (handTwo > handOne)
-            {
-                cout << handTwo.toString() << " ranks higher than " << handOne.toString() << endl;
-            } else
+            } else if (handOne == handTwo)
             {
                 cout << handOne.toString() << " and " << handTwo.toString() << " are of equal rank" << endl;
             }

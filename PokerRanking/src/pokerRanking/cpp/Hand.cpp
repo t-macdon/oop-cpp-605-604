@@ -279,6 +279,17 @@ bool Hand::operator>(const Hand& v1) const
     }
 }
 
+bool Hand::operator==(const Hand& v1) const
+{
+    if (compareTo(v1) == 0)
+    {
+        return true;
+    } else
+    {
+        return false;
+    }
+}
+
 Hand::Category Hand::getCategory() const
 {
     return category;
