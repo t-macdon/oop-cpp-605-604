@@ -1,8 +1,9 @@
 #ifndef HAND_H
 #define HAND_H
 
-#include <vector>
+#include <map>
 #include <string>
+#include <vector>
 
 #include "Card.h"
 
@@ -18,7 +19,8 @@ public:
         FOUR_OF_A_KIND,
         THREE_OF_A_KIND,
         TWO_OF_A_KIND,
-        NONE,
+        TWO_PAIR,
+        HIGH_CARD,
         INCOMPLETE
     };
     Hand();
@@ -29,13 +31,19 @@ public:
     Category getCategory();
 private:
     void determineCategory();
-    std::vector<Card> handVector;
-    Category category = Category::INCOMPLETE;
+    bool isFlush();
+    bool isStraight();
+    bool isFourOfAKind();
+    bool isThreeOfAKind();
+    bool isTwoOfAKind();
+    bool isTwoPair();
+    bool isFullHouse();
 
-    /**
-     * @brief Score is only used when the card category matches that of another hand
-     */
-    int score = 0;
+    int getMostDuplicates();
+
+    std::vector<Card> handVector;
+    std::map<Card, int> pairCounter;
+    Category category = Category::INCOMPLETE;
 };
 
 #endif
