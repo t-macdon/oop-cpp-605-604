@@ -28,6 +28,8 @@ class Card {
         int operator-(const Card& v1) const;
         bool operator==(const Card& v1) const;
         bool operator!=(const Card& v1) const;
+        bool operator<(const Card& v1) const;
+        bool operator>(const Card& v1) const;
     private:
         static std::string suitToString(Suit suit);
         static Suit stringToSuit(std::string str);

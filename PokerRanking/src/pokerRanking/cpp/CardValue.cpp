@@ -141,3 +141,11 @@ bool CardValue::operator==(const CardValue& v1) const {
 bool CardValue::operator!=(const CardValue& v1) const {
     return !(*this == v1);
 }
+
+bool CardValue::operator<(const CardValue& v1) const {
+    return this->getValue() < v1.getValue();
+}
+
+bool CardValue::operator>(const CardValue& v1) const {
+    return this->getValue() > v1.getValue();
+}

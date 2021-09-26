@@ -45,6 +45,8 @@ class CardValue {
         int operator-(const CardValue& v1) const;
         bool operator==(const CardValue& v1) const;
         bool operator!=(const CardValue& v1) const;
+        bool operator<(const CardValue& v1) const;
+        bool operator>(const CardValue& v1) const;
 
         std::string toString();
 
