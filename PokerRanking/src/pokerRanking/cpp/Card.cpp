@@ -1,7 +1,7 @@
 /**
  * @file Card.cpp
  * @author Michael Schumacher, Tyler MacDonald
- * @brief 
+ * @brief Implementation file for the Card class
  * @version 0.1
  * @date 2021-09-22
  */

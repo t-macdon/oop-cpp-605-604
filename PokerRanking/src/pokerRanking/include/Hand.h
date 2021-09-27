@@ -1,3 +1,11 @@
+/**
+ * @file Hand.h
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Interface file for the Hand class
+ * @version 0.1
+ * @date 2021-09-26
+ */
+
 #ifndef HAND_H
 #define HAND_H
 

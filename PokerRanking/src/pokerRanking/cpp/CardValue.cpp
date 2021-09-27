@@ -66,7 +66,7 @@ CardValue::Value CardValue::stringToValue(string str) {
     throw runtime_error("invalid string supplied");
 }
 
-std::string CardValue::toString()
+std::string CardValue::toString() const
 {
     switch(value)
     {

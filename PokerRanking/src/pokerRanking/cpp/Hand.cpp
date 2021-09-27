@@ -1,7 +1,7 @@
 /**
- * @file CardValue.cpp
+ * @file Hand.cpp
  * @author Michael Schumacher, Tyler MacDonald
- * @brief Implementation for the CardValue class
+ * @brief Implementation for the Hand class
  * @version 0.1
  * @date 2021-09-25
  */

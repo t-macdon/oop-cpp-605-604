@@ -16,7 +16,10 @@
  */
 class CardValue {
     public:
-        // Explicitly use enum, not class, to permit conversion to int
+        /**
+         * @brief Enumerated values that a card can take
+         * Explicitly use enum, not class, to permit conversion to int
+         */
         enum Value {
             ACE=1,
             TWO,
@@ -32,32 +35,94 @@ class CardValue {
             QUEEN,
             KING,
         };
-        // We will be modifying the string inline, so pass by value to copy it.
-        CardValue(std::string str);
-        CardValue(Value value);
-        // Overload the usual comparison operators.
-        // Might also be worth adding a "distance" function and
-        // include that with the subtract operator.
-        // The idea would be to find successive cards.
 
+        /**
+         * @brief Construct a new Card Value object
+         * Uses @ref stringToValue to map a string to a CardValue
+         * @note We pass string by value as we modify the string inline, so cannot pass const ref
+         * @param str 
+         */
+        CardValue(std::string str);
+
+        /**
+         * @brief Construct a new Card Value object
+         * @param value 
+         */
+        CardValue(Value value);
+
+        /**
+         * @brief Get the Value object
+         * 
+         * @return Value 
+         */
         Value getValue() const {return this->value; }
+
+        /**
+         * @brief Check for the distance between this card and another
+         * Distance is always positive, and accounts for both high and low ace
+         * @param v1 
+         * @return int 
+         */
         int distance(const CardValue& v1) const;
+
+        /**
+         * @brief Operator overload for the @ref distance method
+         * @param v1 
+         * @return int 
+         */
         int operator-(const CardValue& v1) const;
+
+        /**
+         * @brief Check for equality between two cards
+         * Cards are considered equal if they are of equal values. Suit is ignored.
+         * @param v1 
+         * @return true Cards match in value
+         * @return false Cards don't match in value
+         */
         bool operator==(const CardValue& v1) const;
+
+        /**
+         * @brief Inverse of the == operator.
+         * Cards are considered equal if they are of equal values. Suit is ignored.
+         */
         bool operator!=(const CardValue& v1) const;
+
+        /**
+         * @brief Check if a given card has a lower value
+         * @param v1 
+         */
         bool operator<(const CardValue& v1) const;
+
+        /**
+         * @brief Check if a given card has a higher value
+         * @param v1 
+         */
         bool operator>(const CardValue& v1) const;
 
-        std::string toString();
 
-        // How would the "hand checker" look? 
-        // Do we need to sort the hand before looking for highest scores?
-        // If so, we probably need to implement >, < operators.
-        // So what happens with ACE?
-        // Otherwise, can we use just distance?
+        /**
+         * @brief Return a string representation of this CardValue object
+         * 
+         * @return std::string 
+         */
+        std::string toString() const;
     private:
-        // We will be modifying the string inline, so pass by value to copy it.
+        /**
+         * @brief Maps a given string to a card value
+         * Throws a runtime error if no conversion can be made
+         * @note We pass string by value as we modify the string inline, so cannot pass const ref
+         * @param str 
+         * @return Value 
+         */
         static Value stringToValue(std::string str);
+        
+        /**
+         * @brief Calculate the distance between two card values
+         * 
+         * @param v1 
+         * @param v2 
+         * @return int 
+         */
         static int distanceBetweenValues(const CardValue& v1, const CardValue& v2);
         Value value;
 };
