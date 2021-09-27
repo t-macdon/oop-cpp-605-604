@@ -29,6 +29,14 @@ bool isFileAccessible(std::string filepath)
     return f.good();
 }
 
+/**
+ * @brief Check if a given key is null
+ * 
+ * @param value 
+ * @param key 
+ * @return true Key is null
+ * @return false Key is not null (and so exists)
+ */
 bool isJsonKeyNull(Json::Value value, std::string key)
 {
     if (value == Json::Value::null)
@@ -39,6 +47,14 @@ bool isJsonKeyNull(Json::Value value, std::string key)
     return false;
 }
 
+/**
+ * @brief Load an array of Hand objects from a given Json value
+ * 
+ * @param value 
+ * @param handArray 
+ * @return true Properly loaded json value
+ * @return false Unable to load json value
+ */
 bool populateHandArray(Json::Value value, array<string, Hand::HAND_SIZE> &handArray)
 {
     // confirm it's an array
@@ -58,6 +74,13 @@ bool populateHandArray(Json::Value value, array<string, Hand::HAND_SIZE> &handAr
     return true;
 }
 
+/**
+ * @brief Load in a JSON representation of many poker games and display their results
+ * 
+ * @param argc 
+ * @param argv Expects 1 argument of a json filepath
+ * @return int 
+ */
 int main(int argc, char *argv[])
 {
     // get the json filepath from args
