@@ -9,6 +9,7 @@ set (POKER_RANKING_INCLUDE_DIRS /workspaces/oop-cpp-605-604/PokerRanking/src/pok
 set (TEST_SOURCE 
     CardTests.cpp
     CardValueTests.cpp
+    HandTests.cpp
     UnitTestMain.cpp
 )
 
