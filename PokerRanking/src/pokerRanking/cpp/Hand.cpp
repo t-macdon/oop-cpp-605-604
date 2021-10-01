@@ -33,6 +33,12 @@ std::string Hand::toString() const
     return ss.str();
 }
 
+std::ostream& operator<<(std::ostream& os, const Hand& hand) {
+    std::string handAsString = hand.toString();
+    os << handAsString;
+    return os;
+}
+
 bool Hand::addCard(Card card)
 {
     // can't add a card if there are already HAND_SIZE cards

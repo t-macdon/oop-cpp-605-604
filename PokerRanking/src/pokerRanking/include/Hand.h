@@ -9,6 +9,7 @@
 #ifndef HAND_H
 #define HAND_H
 
+#include <iostream>
 #include <map>
 #include <string>
 #include <vector>
@@ -175,4 +176,6 @@ private:
     Category category = Category::INCOMPLETE;
 };
 
+
+std::ostream& operator<<(std::ostream& os, const Hand& hand);
 #endif
