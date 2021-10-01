@@ -244,13 +244,13 @@ TEST_CASE("Hand Test Cases") {
         fourOfAKindA.addCard(Card("4H"));
         fourOfAKindA.addCard(Card("4H"));
         fourOfAKindA.addCard(Card("4H"));
-        fourOfAKindA.addCard(Card("7H"));
+        fourOfAKindA.addCard(Card("2H"));
         Hand fourOfAKindB;
         fourOfAKindB.addCard(Card("3C"));
         fourOfAKindB.addCard(Card("3C"));
         fourOfAKindB.addCard(Card("3C"));
         fourOfAKindB.addCard(Card("3C"));
-        fourOfAKindB.addCard(Card("7C"));
+        fourOfAKindB.addCard(Card("2C"));
         CHECK(fourOfAKindA > fourOfAKindB); 
     }
 
