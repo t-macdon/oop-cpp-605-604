@@ -13,6 +13,10 @@ See Statistic directory
 
 See TicTacToe directory
 
+# Module 4
+
+See PokerRanking directory
+
 # PlantUML
 
 PlantUML is a diagram generation software that runs on Java.
