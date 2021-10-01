@@ -263,7 +263,20 @@ TEST_CASE("Hand Test Cases") {
     }
 
     SUBCASE("Straight Card Comparison") {
-        
+        // [4H, 5C, 6H, 7H, 8H] > [3C, 4C, 5S, 6C, 7C]
+        Hand straightA;
+        straightA.addCard(Card("4H"));
+        straightA.addCard(Card("5C"));
+        straightA.addCard(Card("6H"));
+        straightA.addCard(Card("7H"));
+        straightA.addCard(Card("8H"));
+        Hand straightB;
+        straightB.addCard(Card("3C"));
+        straightB.addCard(Card("4C"));
+        straightB.addCard(Card("5S"));
+        straightB.addCard(Card("6C"));
+        straightB.addCard(Card("7C"));
+        CHECK(straightA > straightB); 
     }
 
     SUBCASE("Three of a Kind Card Comparison") {
