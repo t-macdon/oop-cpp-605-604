@@ -221,13 +221,23 @@ Card Hand::getCard(int i) const
 
 CardValue Hand::getHighCardValue() const
 {
+    std::map<Card, int>::const_iterator counterIterator;
     CardValue highest = CardValue::TWO;
-    for (unsigned int i = 0; i < handVector.size(); i++)
+    for (counterIterator = pairCounter.begin(); counterIterator != pairCounter.end(); counterIterator++)
     {
-        CardValue value = handVector.at(i).getValue();
-        if (value > highest)
+        // first check for the duplicate cases
+        bool isFourOfAKindHighest = (category == Category::FOUR_OF_A_KIND && counterIterator->second == 4);
+        bool isThreeOfAKindHighest = (category == Category::THREE_OF_A_KIND && counterIterator->second == 3);
+        bool isTwoOfAKindHighest = (category == Category::TWO_OF_A_KIND && counterIterator->second == 2);
+        if (isFourOfAKindHighest || isThreeOfAKindHighest | isTwoOfAKindHighest)
         {
-            highest = value;
+            return counterIterator->first.getValue();
+        }
+
+        // update highest valued card if applicable
+        if (counterIterator->first.getValue() > highest)
+        {
+            highest = counterIterator->first.getValue();
         }
     }
     return highest;
