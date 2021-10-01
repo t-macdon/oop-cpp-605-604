@@ -221,7 +221,7 @@ TEST_CASE("Hand Test Cases") {
     }
 
     SUBCASE("Straight Flush Card Comparison") {
-        // [4H, 5H, 6H, 7H, 7H] > [3C, 4C, 5C, 6C, 7C]
+        // [4H, 5H, 6H, 7H, 8H] > [3C, 4C, 5C, 6C, 7C]
         Hand straightFlushA;
         straightFlushA.addCard(Card("4H"));
         straightFlushA.addCard(Card("5H"));
@@ -238,7 +238,20 @@ TEST_CASE("Hand Test Cases") {
     }
 
     SUBCASE("Four of a Kind Card Comparison") {
-        
+        // [4H, 4H, 4H, 4H, 7H] > [3C, 3C, 3C, 3C, 7C]
+        Hand fourOfAKindA;
+        fourOfAKindA.addCard(Card("4H"));
+        fourOfAKindA.addCard(Card("4H"));
+        fourOfAKindA.addCard(Card("4H"));
+        fourOfAKindA.addCard(Card("4H"));
+        fourOfAKindA.addCard(Card("7H"));
+        Hand fourOfAKindB;
+        fourOfAKindB.addCard(Card("3C"));
+        fourOfAKindB.addCard(Card("3C"));
+        fourOfAKindB.addCard(Card("3C"));
+        fourOfAKindB.addCard(Card("3C"));
+        fourOfAKindB.addCard(Card("7C"));
+        CHECK(fourOfAKindA > fourOfAKindB); 
     }
 
     SUBCASE("Full House Card Comparison") {
