@@ -255,7 +255,40 @@ TEST_CASE("Hand Test Cases") {
     }
 
     SUBCASE("Full House Card Comparison") {
-        
+        // 2 cases: one where the 3-cards determine the outcome
+        //          another one where the 2-cards determine the outcome
+
+        // check 1
+        // [5H, 5S, 5C, 7D, 7C] > [4H, 4S, 4C, 6D, 6C]
+        Hand fullHouseA;
+        fullHouseA.addCard(Card("5H"));
+        fullHouseA.addCard(Card("5S"));
+        fullHouseA.addCard(Card("5C"));
+        fullHouseA.addCard(Card("6D"));
+        fullHouseA.addCard(Card("6C"));
+        Hand fullHouseB;
+        fullHouseB.addCard(Card("4H"));
+        fullHouseB.addCard(Card("4S"));
+        fullHouseB.addCard(Card("4C"));
+        fullHouseB.addCard(Card("7D"));
+        fullHouseB.addCard(Card("7C"));
+        CHECK(fullHouseA > fullHouseB); 
+
+        // check 2
+        // [5H, 5S, 5C, 7D, 7C] > [5H, 5S, 5C, 6D, 6C]
+        Hand fullHouseC;
+        fullHouseC.addCard(Card("5H"));
+        fullHouseC.addCard(Card("5S"));
+        fullHouseC.addCard(Card("5C"));
+        fullHouseC.addCard(Card("7D"));
+        fullHouseC.addCard(Card("7C"));
+        Hand fullHouseD;
+        fullHouseD.addCard(Card("5H"));
+        fullHouseD.addCard(Card("5S"));
+        fullHouseD.addCard(Card("5C"));
+        fullHouseD.addCard(Card("6D"));
+        fullHouseD.addCard(Card("6C"));
+        CHECK(fullHouseC > fullHouseD); 
     }
 
     SUBCASE("Flush Card Comparison") {
