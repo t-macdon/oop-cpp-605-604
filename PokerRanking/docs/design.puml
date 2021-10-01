@@ -1,0 +1,118 @@
+@startuml PokerRanking Design
+
+title PokerRanking Design
+
+enum Suit
+{
+    HEART
+    DIAMOND
+    CLUB
+    SPADE
+}
+
+class Card
+{
+    + Suit getSuit()
+    + CardValue getValue()
+    + std::string toString()
+    + void setValue()
+    + int operator-(Card v1)
+    + bool operator==(Card v1)
+    + bool operator!=(Card v1)
+    + bool operator<(Card v1)
+    + bool operator>(Card v1)
+    __
+    - CardValue value
+    - Suit suit
+}
+
+enum Value
+{
+    ACE,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX,
+    SEVEN,
+    EIGHT,
+    NINE,
+    TEN,
+    JACK,
+    QUEEN,
+    KING
+}
+
+class CardValue
+{
+    + Value getValue()
+    + int distance(CardValue v1)
+    + bool operator==(CardValue v1)
+    + bool operator!=(CardValue v1)
+    + bool operator<(CardValue v1)
+    + bool operator>(CardValue v1)
+    + std::string toString()
+    - {static} Value stringToValue(std::string str)
+    - {static} int distanceBetweenValues(CardValue v1, CardValue v2)
+    __
+    - Value value
+}
+
+enum Category
+{
+    STRAIGHT_FLUSH
+    FOUR_OF_A_KIND
+    FULL_HOUSE
+    FLUSH
+    STRAIGHT
+    THREE_OF_A_KIND
+    TWO_PAIR
+    TWO_OF_A_KIND
+    HIGH_CARD
+    INCOMPLETE
+}
+
+class Hand
+{
+    + std::string toString()
+    + bool addCard(Card card)
+    + Card getCard(int i)
+    + Category getCategory()
+    + bool operator<(Hand v1)
+    + bool operator>(Hand v1)
+    + bool operator==(Hand v1)
+    - void determineCategory()
+    - bool isFlush()
+    - bool isStraight()
+    - bool isFourOfAKind()
+    - bool isThreeOfAKind()
+    - bool isTwoOfAKind()
+    - bool isTwoPair()
+    - bool isFullHouse()
+    - int getMostDuplicates()
+    - int compareTo(Hand v1)
+    - int getScore()
+    - CardValue getHighCardValue()
+    __
+    + {static} int HAND_SIZE = 5
+    - std::vector<Card> handVector
+    - std::map<Card, int> pairCounter
+    - Category Category = Category::INCOMPLETE
+}
+
+class main
+{
+    + bool isFileAccessible(std::string filepath)
+    + bool isJsonKeyNull(Json::Value value, std::string key)
+    + bool populateHandArray(Json::Value value, array<string, Hand::HAND_SIZE> &handArray)
+}
+
+main -- Hand
+Hand -right-* Card
+Card -- CardValue
+Card -right- Suit
+CardValue -left- Value
+
+Hand -left- Category
+
+@enduml
