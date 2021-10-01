@@ -11,6 +11,7 @@ set (TEST_SOURCE
     CardValueTests.cpp
     HandTests.cpp
     UnitTestMain.cpp
+    JSONHandTests.cpp
 )
 
 # create test executable
