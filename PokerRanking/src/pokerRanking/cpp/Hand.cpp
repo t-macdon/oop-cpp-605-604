@@ -239,10 +239,10 @@ CardValue Hand::getHighCardValue() const
         if (isTwoPairCard || category == Category::HIGH_CARD || category == Category::STRAIGHT || 
             category == Category::STRAIGHT_FLUSH || category == Category::FLUSH)
         {
-        // update highest valued card if applicable
-        if (counterIterator->first.getValue() > highest)
-        {
-            highest = counterIterator->first.getValue();
+            // update highest valued card if applicable
+            if (counterIterator->first.getValue() > highest)
+            {
+                highest = counterIterator->first.getValue();
             }
         }
     }
