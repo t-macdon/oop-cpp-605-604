@@ -310,7 +310,20 @@ TEST_CASE("Hand Test Cases") {
     }
 
     SUBCASE("Two Pair Card Comparison") {
-        
+        // [4H, 4C, 5H, 5H, 7H] > [3C, 3C, 4S, 4C, 7C]
+        Hand twoPairA;
+        twoPairA.addCard(Card("4H"));
+        twoPairA.addCard(Card("4C"));
+        twoPairA.addCard(Card("5H"));
+        twoPairA.addCard(Card("5H"));
+        twoPairA.addCard(Card("7H"));
+        Hand twoPairB;
+        twoPairB.addCard(Card("3C"));
+        twoPairB.addCard(Card("3C"));
+        twoPairB.addCard(Card("4S"));
+        twoPairB.addCard(Card("4C"));
+        twoPairB.addCard(Card("7C"));
+        CHECK(twoPairA > twoPairB); 
     }
 
     SUBCASE("Two of a Kind Card Comparison") {
