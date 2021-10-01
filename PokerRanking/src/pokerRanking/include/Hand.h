@@ -162,6 +162,13 @@ private:
      * @return CardValue 
      */
     CardValue getHighCardValue() const;
+    
+    /**
+     * @brief Finds the card value repeated the designated number of times
+     * @param numberOfRepeats Number of times the card value repeats
+     * @return CardValue 
+     */
+    CardValue getRepeatedCardValue(int numberOfRepeats) const;
 
     std::vector<Card> handVector;
     std::map<Card, int> pairCounter;

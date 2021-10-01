@@ -34,6 +34,7 @@ class CardValue {
             JACK,
             QUEEN,
             KING,
+            NONE
         };
 
         /**

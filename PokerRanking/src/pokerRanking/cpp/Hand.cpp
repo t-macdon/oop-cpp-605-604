@@ -257,8 +257,35 @@ int Hand::compareTo(const Hand& v1) const
     } else if (category > v1.getCategory())
     {
         return 1;
-    } else
+    } else if (category == Category::FULL_HOUSE)
     {
+        // first check 3 of a kind
+        // if necessary, check 2 of a kind
+        CardValue thisThreeOfAKind = getRepeatedCardValue(3);
+        CardValue otherThreeOfAKind = v1.getRepeatedCardValue(3);
+        if (thisThreeOfAKind < otherThreeOfAKind)
+        {
+            return -1;
+        } else if (thisThreeOfAKind > otherThreeOfAKind)
+        {
+            return 1;
+        } else
+        {
+            CardValue thisTwoOfAKind = getRepeatedCardValue(2);
+            CardValue otherTwoOfAKind = v1.getRepeatedCardValue(2);
+            if (thisTwoOfAKind < otherTwoOfAKind)
+            {
+                return -1;
+            } else if (thisTwoOfAKind > otherTwoOfAKind)
+            {
+                return 1;
+            } else
+            {
+                return 0;
+            }
+        }
+    }
+    else {
         int thisScore = getScore();
         int otherScore = v1.getScore();
         if (thisScore < otherScore)
@@ -317,4 +344,17 @@ int Hand::getScore() const
 {
     int score = (int) category + (int) getHighCardValue().getValue();
     return score;
+}
+
+CardValue Hand::getRepeatedCardValue(int numberOfRepeats) const
+{
+    std::map<Card, int>::const_iterator counterIterator;
+    for (counterIterator = pairCounter.begin(); counterIterator != pairCounter.end(); counterIterator++)
+    {
+        if (counterIterator->second == numberOfRepeats)
+        {
+            return counterIterator->first.getValue();
+        }
+    }
+    return CardValue::NONE;
 }
