@@ -219,13 +219,26 @@ TEST_CASE("Hand Test Cases") {
         CHECK(highCard < twoPair);
         CHECK(highCard < twoOfAKind);
     }
-    
-    SUBCASE("Straight Flush Card Comparison") {
 
+    SUBCASE("Straight Flush Card Comparison") {
+        // [4H, 5H, 6H, 7H, 7H] > [3C, 4C, 5C, 6C, 7C]
+        Hand straightFlushA;
+        straightFlushA.addCard(Card("4H"));
+        straightFlushA.addCard(Card("5H"));
+        straightFlushA.addCard(Card("6H"));
+        straightFlushA.addCard(Card("7H"));
+        straightFlushA.addCard(Card("8H"));
+        Hand straightFlushB;
+        straightFlushB.addCard(Card("3C"));
+        straightFlushB.addCard(Card("4C"));
+        straightFlushB.addCard(Card("5C"));
+        straightFlushB.addCard(Card("6C"));
+        straightFlushB.addCard(Card("7C"));
+        CHECK(straightFlushA > straightFlushB); 
     }
 
     SUBCASE("Four of a Kind Card Comparison") {
-
+        
     }
 
     SUBCASE("Full House Card Comparison") {
