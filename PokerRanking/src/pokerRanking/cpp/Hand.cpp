@@ -229,7 +229,7 @@ CardValue Hand::getHighCardValue() const
         bool isFourOfAKindHighest = (category == Category::FOUR_OF_A_KIND && counterIterator->second == 4);
         bool isThreeOfAKindHighest = (category == Category::THREE_OF_A_KIND && counterIterator->second == 3);
         bool isTwoOfAKindHighest = (category == Category::TWO_OF_A_KIND && counterIterator->second == 2);
-        if (isFourOfAKindHighest || isThreeOfAKindHighest | isTwoOfAKindHighest)
+        if (isFourOfAKindHighest || isThreeOfAKindHighest || isTwoOfAKindHighest)
         {
             return counterIterator->first.getValue();
         }
