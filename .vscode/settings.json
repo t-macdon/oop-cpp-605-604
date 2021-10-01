@@ -55,5 +55,7 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "typeinfo": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "${workspaceFolder}/PokerRanking",
+    "cmake.configureOnOpen": true
 }

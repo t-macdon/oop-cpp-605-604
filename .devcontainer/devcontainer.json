@@ -18,7 +18,10 @@
 		"jebbs.plantuml",
 		"streetsidesoftware.code-spell-checker",
 		"cschlosser.doxdocgen",
-		"nobuhito.printcode"
+		"nobuhito.printcode",
+		"twxs.cmake",
+		"ms-vscode.cmake-tools"
+
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
