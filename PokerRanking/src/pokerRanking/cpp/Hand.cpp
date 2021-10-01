@@ -253,10 +253,12 @@ int Hand::compareTo(const Hand& v1) const
         return 1;
     } else
     {
-        if (getScore() < v1.getScore())
+        int thisScore = getScore();
+        int otherScore = v1.getScore();
+        if (thisScore < otherScore)
         {
             return -1;
-        } else if (getScore() > v1.getScore())
+        } else if (thisScore > otherScore)
         {
             return 1;
         } else
