@@ -279,6 +279,19 @@ TEST_CASE("Hand Test Cases") {
     }
 
     SUBCASE("High Card Comparison") {
-        
+        // [2S, 5S, 7S, 9S, 10S] > [AD, 3D, 5D, 7D, 8D]
+        Hand highCardA;
+        highCardA.addCard(Card("2S"));
+        highCardA.addCard(Card("5S"));
+        highCardA.addCard(Card("7S"));
+        highCardA.addCard(Card("9S"));
+        highCardA.addCard(Card("10S"));
+        Hand highCardB;
+        highCardB.addCard(Card("AD"));
+        highCardB.addCard(Card("3D"));
+        highCardB.addCard(Card("5D"));
+        highCardB.addCard(Card("7D"));
+        highCardB.addCard(Card("8D"));
+        CHECK(highCardA > highCardB); 
     }
 }
