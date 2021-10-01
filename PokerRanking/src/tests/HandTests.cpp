@@ -219,4 +219,40 @@ TEST_CASE("Hand Test Cases") {
         CHECK(highCard < twoPair);
         CHECK(highCard < twoOfAKind);
     }
+    
+    SUBCASE("Straight Flush Card Comparison") {
+
+    }
+
+    SUBCASE("Four of a Kind Card Comparison") {
+
+    }
+
+    SUBCASE("Full House Card Comparison") {
+        
+    }
+
+    SUBCASE("Flush Card Comparison") {
+        
+    }
+
+    SUBCASE("Straight Card Comparison") {
+        
+    }
+
+    SUBCASE("Three of a Kind Card Comparison") {
+        
+    }
+
+    SUBCASE("Two Pair Card Comparison") {
+        
+    }
+
+    SUBCASE("Two of a Kind Card Comparison") {
+        
+    }
+
+    SUBCASE("High Card Comparison") {
+        
+    }
 }
