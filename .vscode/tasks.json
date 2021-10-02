@@ -3,9 +3,9 @@
         {
             "type": "shell",
             "label": "Build and Test",
-            "command": "./bin/${input:project}",
+            "command": "./bin/${input:project}Test",
             "options": {
-                "cwd": "${workspaceFolder}/${input:project}"
+                "cwd": "${workspaceFolder}/${input:project}/build"
             },
             "presentation": {
                 "reveal": "always",
@@ -27,7 +27,7 @@
             "label": "Build",
             "command": "make",
             "options": {
-                "cwd": "${workspaceFolder}/${input:project}"
+                "cwd": "${workspaceFolder}/${input:project}/build"
             },
             "presentation": {
                 "reveal": "always",

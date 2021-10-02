@@ -67,6 +67,11 @@ bool Hand::addCard(Card card)
     return true;
 }
 
+vector<CardValue> Hand::getWildCardValues() const 
+{
+    return wildCardValues;
+}
+
 bool Hand::isFlush()
 {
     // start with the first suit to compare to
@@ -78,6 +83,8 @@ bool Hand::isFlush()
             return false;
         }
     }
+    // There are no wildcards in a flush
+    wildCardValues.clear();
     return true;
 }
 
@@ -93,61 +100,101 @@ bool Hand::isStraight()
             return false;
         }
     }
+
+    // There are no wildcards in a straight
+    wildCardValues.clear();
     return true;
 }
 
 bool Hand::isFourOfAKind()
 {
     map<Card, int>::iterator mapItr;
+    vector<CardValue> possibleWildCards;
+    bool fourOfAKindFound = false;
     for (mapItr = pairCounter.begin(); mapItr != pairCounter.end(); mapItr++)
     {
         if (mapItr->second == 4)
         {
-            return true;
+            fourOfAKindFound = true;
+        }
+        else
+        {
+            possibleWildCards.push_back(mapItr->first.getValue());
         }
     }
-    return false;
+
+    if (fourOfAKindFound)
+    {
+        wildCardValues = possibleWildCards;
+    }
+    return fourOfAKindFound;
 }
 
 bool Hand::isThreeOfAKind()
 {
     map<Card, int>::iterator mapItr;
+    vector<CardValue> possibleWildCards;
+    bool threeOfAKindFound = false;
     for (mapItr = pairCounter.begin(); mapItr != pairCounter.end(); mapItr++)
     {
         if (mapItr->second == 3)
         {
-            return true;
+            threeOfAKindFound = true;
+        }
+        else
+        {
+            possibleWildCards.push_back(mapItr->first.getValue());
         }
     }
-    return false;
+    if (threeOfAKindFound)
+    {
+        wildCardValues = possibleWildCards;
+    }
+    return threeOfAKindFound;
 }
 
 bool Hand::isTwoOfAKind()
 {
     map<Card, int>::iterator mapItr;
+    vector<CardValue> possibleWildCards;
+    bool twoOfAKindFound = false;
     for (mapItr = pairCounter.begin(); mapItr != pairCounter.end(); mapItr++)
     {
         if (mapItr->second == 2)
         {
-            return true;
+            twoOfAKindFound = true;
+        }
+        else
+        {
+            possibleWildCards.push_back(mapItr->first.getValue());
         }
     }
-    return false;
+    if (twoOfAKindFound)
+    {
+        wildCardValues = possibleWildCards;
+    }
+    return twoOfAKindFound;
 }
 
 bool Hand::isTwoPair()
 {
     int numberOfPairs = 0;
     map<Card, int>::iterator mapItr;
+    vector<CardValue> possibleWildCards;
     for (mapItr = pairCounter.begin(); mapItr != pairCounter.end(); mapItr++)
     {
         if (mapItr->second == 2)
         {
             numberOfPairs++;
         }
+        else
+        {
+            possibleWildCards.push_back(mapItr->first.getValue());
+        }
     }
     if (numberOfPairs == 2)
     {
+        wildCardValues = possibleWildCards;
         return true;
     }
     return false;
@@ -180,6 +227,7 @@ void Hand::determineCategory()
     if (threeOfAKind && twoOfAKind)
     {
         category = Category::FULL_HOUSE;
+        wildCardValues.clear();
         return;
     }
 
@@ -221,6 +269,14 @@ void Hand::determineCategory()
     // if we got this far, there's nothing good!
     // so let's set the category to HIGH_CARD
     category = Category::HIGH_CARD;
+    CardValue highCardValue = getHighCardValue();
+    for(Card c: handVector)
+    {
+        if (c.getValue() < highCardValue)
+        {
+            wildCardValues.push_back(c.getValue());
+        }
+    }
 }
 
 Card Hand::getCard(int i) const
@@ -228,19 +284,31 @@ Card Hand::getCard(int i) const
     return handVector.at(i);
 }
 
-CardValue Hand::getTieBreakerCardValue() const
+int Hand::getTieBreaker(vector<CardValue> v1, vector<CardValue> v2)
 {
-    CardValue highest = CardValue::TWO;
-    for(Card card: handVector) {
-        highest = highest > card.getValue() ? highest : card.getValue();
+    sort(v1.begin(), v1.end());
+    sort(v2.begin(), v2.end());
+    size_t cardsToCompare = min(v1.size(), v2.size());
+    for(size_t idx = 0; idx < cardsToCompare; idx++) {
+        CardValue card1 = v1.at(v1.size()-1-idx);
+        CardValue card2 = v2.at(v2.size()-1-idx);
+        if(card1 == card2) {
+            continue;
+        }
+        if(card1 > card2) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
     }
-    return highest;
+    return 0;
 }
 
 vector<Card> Hand::getHandVector() const {
     return this->handVector;
 }
-#if 1
+
 CardValue Hand::getHighCardValue() const
 {
     map<Card, int>::const_iterator counterIterator;
@@ -270,75 +338,83 @@ CardValue Hand::getHighCardValue() const
     }
     return highest;
 }
-#endif
 
 int Hand::compareTo(const Hand& v1) const
 {
     if (category < v1.getCategory())
     {
         return -1;
-    } else if (category > v1.getCategory())
+    } 
+    else if (category > v1.getCategory())
     {
         return 1;
-    } else if (category == Category::FULL_HOUSE)
+    } 
+    // The two hands have the same category
+    else 
     {
-        // first check 3 of a kind
-        // if necessary, check 2 of a kind
-        CardValue thisThreeOfAKind = getRepeatedCardValue(3);
-        CardValue otherThreeOfAKind = v1.getRepeatedCardValue(3);
-        if (thisThreeOfAKind < otherThreeOfAKind)
+        // Special case for comparing hands: Full House
+        if (category == Category::FULL_HOUSE)
         {
-            return -1;
-        } else if (thisThreeOfAKind > otherThreeOfAKind)
-        {
-            return 1;
-        } else
-        {
-            CardValue thisTwoOfAKind = getRepeatedCardValue(2);
-            CardValue otherTwoOfAKind = v1.getRepeatedCardValue(2);
-            if (thisTwoOfAKind < otherTwoOfAKind)
+            // first check 3 of a kind
+            // if necessary, check 2 of a kind
+            CardValue thisThreeOfAKind = getRepeatedCardValue(3);
+            CardValue otherThreeOfAKind = v1.getRepeatedCardValue(3);
+            if (thisThreeOfAKind < otherThreeOfAKind)
             {
                 return -1;
-            } else if (thisTwoOfAKind > otherTwoOfAKind)
+            } else if (thisThreeOfAKind > otherThreeOfAKind)
             {
                 return 1;
             } else
             {
-                return 0;
+                CardValue thisTwoOfAKind = getRepeatedCardValue(2);
+                CardValue otherTwoOfAKind = v1.getRepeatedCardValue(2);
+                if (thisTwoOfAKind < otherTwoOfAKind)
+                {
+                    return -1;
+                } else if (thisTwoOfAKind > otherTwoOfAKind)
+                {
+                    return 1;
+                } else
+                {
+                    return 0;
+                }
             }
-        }
-    } else if (category == Category::FLUSH)
-    {
-        vector<Card> thisHand = this->getHandVector();
-        vector<Card> v1Hand = v1.getHandVector();
-        for(int i=thisHand.size()-1 ; i >= 0; i--) {
-            if(thisHand[i] == v1Hand[i]) {
-                continue;
-            }
-            else if (thisHand[i] > v1Hand[i]) {
-                return 1;
-            }
-            else {
-                return -1;
-            }
-        }
-        return 0;
-    }
-    else {
-        int thisScore = getScore();
-        int otherScore = v1.getScore();
-        if (thisScore < otherScore)
+        } // End of full house category match
+        // Special case for comparing hands: Flush
+        else if (category == Category::FLUSH)
         {
-            return -1;
-        } else if (thisScore > otherScore)
-        {
-            return 1;
-        } else
-        {
+            vector<Card> thisHand = this->getHandVector();
+            vector<Card> v1Hand = v1.getHandVector();
+            for(int i=thisHand.size()-1 ; i >= 0; i--) {
+                if(thisHand[i] == v1Hand[i]) {
+                    continue;
+                }
+                else if (thisHand[i] > v1Hand[i]) {
+                    return 1;
+                }
+                else {
+                    return -1;
+                }
+            }
             return 0;
-        }
-    }
-}
+        } // End of flush category match
+        // General case for when the categories match
+        else 
+        {
+            int thisScore = getScore();
+            int otherScore = v1.getScore();
+            if (thisScore == otherScore) {
+                // Move on to the tie-breaker
+                vector<CardValue> thisWildCard = getWildCardValues();
+                vector<CardValue> v1WildCard = v1.getWildCardValues();
+                return getTieBreaker(thisWildCard, v1WildCard);
+            } else {
+                return (thisScore > otherScore) ? 1 : -1;
+            }
+        } // End of general category match
+    } // End of category match
+} // End of compareTo function
 
 
 bool Hand::operator<(const Hand& v1) const
@@ -382,10 +458,44 @@ Hand::Category Hand::getCategory() const
 int Hand::getScore() const
 {
     const int base = CardValue::ACE+1;
-    int score = ((int)getCategory()*base*base) + 
-                ((int)getHighCardValue().getValue() * base) +
-                ((int)getTieBreakerCardValue().getValue());
+    // Find the strength of this category.
+    // This is determined by the highest value card that makes
+    // Up the category. By wary of Ace, it can be the highest or lowest.
+    CardValue categoryStrength = CardValue::TWO;
+    vector<CardValue> categoryCardValues = getCategoryCardValues();
+    sort(categoryCardValues.begin(), categoryCardValues.end());
+    categoryStrength = categoryCardValues.back();
+    // Ace can be a pain if we're in a straight
+    if(category == Category::STRAIGHT || category == Category::STRAIGHT_FLUSH) {
+        // Do we have a LOW ACE?
+        if(categoryStrength == CardValue::ACE &&
+           categoryCardValues.front() == CardValue::TWO) {
+               // If we have a low ace, pick the card value
+               // that is just below ace
+            categoryStrength = categoryCardValues.at(categoryCardValues.size()-2);
+        }
+    }
+
+
+    int score = ((int)getCategory()*base) + 
+                ((int)categoryStrength.getValue());
+
     return score;
+}
+
+vector<CardValue> Hand::getCategoryCardValues() const
+{
+    vector<CardValue> categoryCardValues;
+    vector<CardValue> wildCardValues = getWildCardValues();
+    for(Card c: getHandVector())
+    {
+        auto v = find(wildCardValues.begin(), wildCardValues.end(), c.getValue());
+        // Did not find this card in wildCards, so it's part of category
+        if (v == wildCardValues.end()) {
+            categoryCardValues.push_back(c.getValue());
+        }
+    }
+    return categoryCardValues;
 }
 
 CardValue Hand::getRepeatedCardValue(int numberOfRepeats) const

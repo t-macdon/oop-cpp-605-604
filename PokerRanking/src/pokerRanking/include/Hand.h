@@ -100,6 +100,9 @@ public:
 
     std::vector<Card> getHandVector() const;
 
+    std::vector<CardValue> getWildCardValues() const;
+    std::vector<CardValue> getCategoryCardValues() const;
+
 private:
     /**
      * @brief Evaluates the current category of this hand
@@ -173,13 +176,25 @@ private:
      */
     CardValue getRepeatedCardValue(int numberOfRepeats) const;
 
-    CardValue getTieBreakerCardValue() const;
+    static int getTieBreaker(std::vector<CardValue> v1, std::vector<CardValue> v2);
 
+    // A vector containing a list of all cards in this hand.
     std::vector<Card> handVector;
+
+    // For each card in this hand, provides a count of the number of cards with that value
     std::map<Card, int> pairCounter;
+
+    // Contains the cards that are not contributing to the category
+    std::vector<CardValue> wildCardValues;
     Category category = Category::INCOMPLETE;
 };
 
-
+/**
+ * @brief Output stream operator overload
+ * Calls the underlying @ref Hand.toString() method
+ * @param os 
+ * @param hand 
+ * @return std::ostream& 
+ */
 std::ostream& operator<<(std::ostream& os, const Hand& hand);
 #endif
