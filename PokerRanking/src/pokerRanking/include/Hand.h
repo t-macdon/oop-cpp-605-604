@@ -172,11 +172,11 @@ private:
     /**
      * @brief Finds the card value repeated the designated number of times
      * @param numberOfRepeats Number of times the card value repeats
-     * @return CardValue 
+     * @return std::vector<CardValue>
      */
-    CardValue getRepeatedCardValue(int numberOfRepeats) const;
+    std::vector<CardValue> getRepeatedCardValue(int numberOfRepeats) const;
 
-    static int getTieBreaker(std::vector<CardValue> v1, std::vector<CardValue> v2);
+    static int getTieBreaker(const Hand& h1, const Hand& h2);
 
     // A vector containing a list of all cards in this hand.
     std::vector<Card> handVector;

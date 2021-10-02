@@ -284,8 +284,11 @@ Card Hand::getCard(int i) const
     return handVector.at(i);
 }
 
-int Hand::getTieBreaker(vector<CardValue> v1, vector<CardValue> v2)
+int Hand::getTieBreaker(const Hand& h1, const Hand& h2)
 {
+    vector<CardValue> v1 = h1.getWildCardValues();
+    vector<CardValue> v2 = h2.getWildCardValues();
+
     sort(v1.begin(), v1.end());
     sort(v2.begin(), v2.end());
     size_t cardsToCompare = min(v1.size(), v2.size());
@@ -357,8 +360,8 @@ int Hand::compareTo(const Hand& v1) const
         {
             // first check 3 of a kind
             // if necessary, check 2 of a kind
-            CardValue thisThreeOfAKind = getRepeatedCardValue(3);
-            CardValue otherThreeOfAKind = v1.getRepeatedCardValue(3);
+            CardValue thisThreeOfAKind = getRepeatedCardValue(3).front();
+            CardValue otherThreeOfAKind = v1.getRepeatedCardValue(3).front();
             if (thisThreeOfAKind < otherThreeOfAKind)
             {
                 return -1;
@@ -367,8 +370,8 @@ int Hand::compareTo(const Hand& v1) const
                 return 1;
             } else
             {
-                CardValue thisTwoOfAKind = getRepeatedCardValue(2);
-                CardValue otherTwoOfAKind = v1.getRepeatedCardValue(2);
+                CardValue thisTwoOfAKind = getRepeatedCardValue(2).front();
+                CardValue otherTwoOfAKind = v1.getRepeatedCardValue(2).front();
                 if (thisTwoOfAKind < otherTwoOfAKind)
                 {
                     return -1;
@@ -399,6 +402,24 @@ int Hand::compareTo(const Hand& v1) const
             }
             return 0;
         } // End of flush category match
+        // Special case for comparing hands: Two pairs
+        else if (category == Category::TWO_PAIR)
+        {
+            // For this case, we do two one_pair comparisons.
+            vector<CardValue> thisValues = getRepeatedCardValue(2);
+            vector<CardValue> v1Values = v1.getRepeatedCardValue(2);
+            if (thisValues.back() == v1Values.back()) {
+                if(thisValues.front() == v1Values.front()) {
+                    return getTieBreaker(*this, v1);
+                }
+                else {
+                    return (thisValues.front() > v1Values.front()) ? 1 : -1;
+                }
+            }
+            else {
+                return (thisValues.back() > v1Values.back()) ? 1 : -1;
+            }
+        } // End of two pair category match
         // General case for when the categories match
         else 
         {
@@ -406,9 +427,7 @@ int Hand::compareTo(const Hand& v1) const
             int otherScore = v1.getScore();
             if (thisScore == otherScore) {
                 // Move on to the tie-breaker
-                vector<CardValue> thisWildCard = getWildCardValues();
-                vector<CardValue> v1WildCard = v1.getWildCardValues();
-                return getTieBreaker(thisWildCard, v1WildCard);
+                return getTieBreaker(*this, v1);
             } else {
                 return (thisScore > otherScore) ? 1 : -1;
             }
@@ -498,15 +517,20 @@ vector<CardValue> Hand::getCategoryCardValues() const
     return categoryCardValues;
 }
 
-CardValue Hand::getRepeatedCardValue(int numberOfRepeats) const
+vector<CardValue> Hand::getRepeatedCardValue(int numberOfRepeats) const
 {
     map<Card, int>::const_iterator counterIterator;
+    vector<CardValue> repeatedValues;
     for (counterIterator = pairCounter.begin(); counterIterator != pairCounter.end(); counterIterator++)
     {
         if (counterIterator->second == numberOfRepeats)
         {
-            return counterIterator->first.getValue();
+            repeatedValues.push_back(counterIterator->first.getValue());
         }
     }
-    return CardValue::NONE;
+    if (repeatedValues.empty()) {
+        return vector<CardValue>{CardValue::NONE};
+    }
+    sort(repeatedValues.begin(), repeatedValues.end());
+    return repeatedValues;
 }
