@@ -9,16 +9,19 @@
 #include <algorithm>
 #include <map>
 #include <sstream>
+#include <vector>
 
 #include "Hand.h"
+
+using namespace std;
 
 Hand::Hand() : handVector(), pairCounter()
 {
 }
 
-std::string Hand::toString() const
+string Hand::toString() const
 {
-    std::stringstream ss;
+    stringstream ss;
     ss << "[";
     for (unsigned int i = 0; i < handVector.size(); i++)
     {
@@ -33,8 +36,8 @@ std::string Hand::toString() const
     return ss.str();
 }
 
-std::ostream& operator<<(std::ostream& os, const Hand& hand) {
-    std::string handAsString = hand.toString();
+ostream& operator<<(ostream& os, const Hand& hand) {
+    string handAsString = hand.toString();
     os << handAsString;
     return os;
 }
@@ -49,7 +52,7 @@ bool Hand::addCard(Card card)
     
     // add to the vector and the pair counter
     handVector.push_back(card);
-    std::pair<std::map<Card, int>::iterator, bool> result = pairCounter.insert(std::pair<Card, int>(card, 1));
+    pair<map<Card, int>::iterator, bool> result = pairCounter.insert(pair<Card, int>(card, 1));
     // if the bool is false then it was already there
     if (!result.second)
     {
@@ -95,7 +98,7 @@ bool Hand::isStraight()
 
 bool Hand::isFourOfAKind()
 {
-    std::map<Card, int>::iterator mapItr;
+    map<Card, int>::iterator mapItr;
     for (mapItr = pairCounter.begin(); mapItr != pairCounter.end(); mapItr++)
     {
         if (mapItr->second == 4)
@@ -108,7 +111,7 @@ bool Hand::isFourOfAKind()
 
 bool Hand::isThreeOfAKind()
 {
-    std::map<Card, int>::iterator mapItr;
+    map<Card, int>::iterator mapItr;
     for (mapItr = pairCounter.begin(); mapItr != pairCounter.end(); mapItr++)
     {
         if (mapItr->second == 3)
@@ -121,7 +124,7 @@ bool Hand::isThreeOfAKind()
 
 bool Hand::isTwoOfAKind()
 {
-    std::map<Card, int>::iterator mapItr;
+    map<Card, int>::iterator mapItr;
     for (mapItr = pairCounter.begin(); mapItr != pairCounter.end(); mapItr++)
     {
         if (mapItr->second == 2)
@@ -135,7 +138,7 @@ bool Hand::isTwoOfAKind()
 bool Hand::isTwoPair()
 {
     int numberOfPairs = 0;
-    std::map<Card, int>::iterator mapItr;
+    map<Card, int>::iterator mapItr;
     for (mapItr = pairCounter.begin(); mapItr != pairCounter.end(); mapItr++)
     {
         if (mapItr->second == 2)
@@ -153,7 +156,7 @@ bool Hand::isTwoPair()
 void Hand::determineCategory()
 {
     // we need the hand to be sorted, so ensure that here
-    std::sort(handVector.begin(), handVector.end());
+    sort(handVector.begin(), handVector.end());
 
     // straight flush
     bool straight = isStraight();
@@ -225,9 +228,22 @@ Card Hand::getCard(int i) const
     return handVector.at(i);
 }
 
+CardValue Hand::getTieBreakerCardValue() const
+{
+    CardValue highest = CardValue::TWO;
+    for(Card card: handVector) {
+        highest = highest > card.getValue() ? highest : card.getValue();
+    }
+    return highest;
+}
+
+vector<Card> Hand::getHandVector() const {
+    return this->handVector;
+}
+#if 1
 CardValue Hand::getHighCardValue() const
 {
-    std::map<Card, int>::const_iterator counterIterator;
+    map<Card, int>::const_iterator counterIterator;
     CardValue highest = CardValue::TWO;
     for (counterIterator = pairCounter.begin(); counterIterator != pairCounter.end(); counterIterator++)
     {
@@ -254,6 +270,7 @@ CardValue Hand::getHighCardValue() const
     }
     return highest;
 }
+#endif
 
 int Hand::compareTo(const Hand& v1) const
 {
@@ -290,6 +307,22 @@ int Hand::compareTo(const Hand& v1) const
                 return 0;
             }
         }
+    } else if (category == Category::FLUSH)
+    {
+        vector<Card> thisHand = this->getHandVector();
+        vector<Card> v1Hand = v1.getHandVector();
+        for(int i=thisHand.size()-1 ; i >= 0; i--) {
+            if(thisHand[i] == v1Hand[i]) {
+                continue;
+            }
+            else if (thisHand[i] > v1Hand[i]) {
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        }
+        return 0;
     }
     else {
         int thisScore = getScore();
@@ -348,13 +381,16 @@ Hand::Category Hand::getCategory() const
 
 int Hand::getScore() const
 {
-    int score = (int) category + (int) getHighCardValue().getValue();
+    const int base = CardValue::ACE+1;
+    int score = ((int)getCategory()*base*base) + 
+                ((int)getHighCardValue().getValue() * base) +
+                ((int)getTieBreakerCardValue().getValue());
     return score;
 }
 
 CardValue Hand::getRepeatedCardValue(int numberOfRepeats) const
 {
-    std::map<Card, int>::const_iterator counterIterator;
+    map<Card, int>::const_iterator counterIterator;
     for (counterIterator = pairCounter.begin(); counterIterator != pairCounter.end(); counterIterator++)
     {
         if (counterIterator->second == numberOfRepeats)

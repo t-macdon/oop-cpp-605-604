@@ -124,7 +124,9 @@ TEST_CASE("Reads Test Cases From JSON File")
             // compare hands based on operator
             if (operatorString.compare(">") == 0)
             {
-                CHECK(handOne > handTwo);
+                CHECK_MESSAGE(handOne > handTwo,
+                    handOne.getCategory()
+                );
             } else if (operatorString.compare("==") == 0)
             {
                 CHECK(handOne == handTwo);

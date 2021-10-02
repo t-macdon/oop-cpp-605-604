@@ -98,6 +98,8 @@ public:
      */
     bool operator==(const Hand& v1) const;
 
+    std::vector<Card> getHandVector() const;
+
 private:
     /**
      * @brief Evaluates the current category of this hand
@@ -170,6 +172,8 @@ private:
      * @return CardValue 
      */
     CardValue getRepeatedCardValue(int numberOfRepeats) const;
+
+    CardValue getTieBreakerCardValue() const;
 
     std::vector<Card> handVector;
     std::map<Card, int> pairCounter;
