@@ -1,7 +1,7 @@
 /**
- * @file main.cpp
+ * @file JSONHandTests.cpp
  * @author Michael Schumacher, Tyler MacDonald
- * @brief Driver for the PokerRanking module
+ * @brief Unit tests for loading JSON files in to the Hand class
  * @version 0.1
  * @date 2021-09-23
  */

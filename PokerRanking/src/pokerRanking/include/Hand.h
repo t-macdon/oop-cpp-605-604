@@ -98,9 +98,22 @@ public:
      */
     bool operator==(const Hand& v1) const;
 
+    /**
+     * @brief Get a copy of this hand's underlying vector of cards
+     * @return std::vector<Card> 
+     */
     std::vector<Card> getHandVector() const;
 
+    /**
+     * @brief Get a vector of the cards that are not contributing to the category
+     * @return std::vector<CardValue> 
+     */
     std::vector<CardValue> getWildCardValues() const;
+
+    /**
+     * @brief Get a vector of the cards that are contributing to the category
+     * @return std::vector<CardValue> 
+     */
     std::vector<CardValue> getCategoryCardValues() const;
 
 private:
