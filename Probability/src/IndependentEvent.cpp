@@ -7,6 +7,8 @@
  */
 
 
+#include <cmath>
+
 #include "IndependentEvent.h"
 
 IndependentEvent::IndependentEvent(double likelihood)
@@ -16,27 +18,32 @@ IndependentEvent::IndependentEvent(double likelihood)
 
 IndependentEvent IndependentEvent::operator&(const IndependentEvent& event) const
 {
-
+    double newLikelihood = this->getLikelihood() * event.getLikelihood();
+    return IndependentEvent(newLikelihood);
 }
 
 IndependentEvent IndependentEvent::operator|(const IndependentEvent& event) const
 {
-
+    double newLikelihood = this->getLikelihood() + event.getLikelihood();
+    return IndependentEvent(newLikelihood);
 }
 
 IndependentEvent IndependentEvent::operator^(const IndependentEvent& event) const
 {
-
+    double newLikelihood = this->getLikelihood() + event.getLikelihood() - (this->getLikelihood() * event.getLikelihood());
+    return IndependentEvent(newLikelihood);
 }
 
 IndependentEvent IndependentEvent::operator-(const IndependentEvent& event) const
 {
-
+    double newLikelihood = this->getLikelihood() - this->getLikelihood() * event.getLikelihood();
+    return IndependentEvent(newLikelihood);
 }
 
 IndependentEvent IndependentEvent::operator~() const
 {
-
+    double newLikelihood = std::abs(1.0 - this->getLikelihood());
+    return IndependentEvent(newLikelihood);
 }
 
 void IndependentEvent::setLikelihood(const double likelihood)
