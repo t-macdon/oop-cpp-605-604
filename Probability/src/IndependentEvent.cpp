@@ -48,14 +48,27 @@ IndependentEvent IndependentEvent::operator~() const
 
 void IndependentEvent::setLikelihood(const double likelihood)
 {
-    if (likelihood < 0.0)
-    {
-        this->likelihood = 0.0;
-    } else if (likelihood > 1.0)
-    {
-        this->likelihood = 1.0;
-    } else
-    {
-        this->likelihood = likelihood;
+    /* Edge case #1: Not a real number. Set to 0 likelihood */
+    if (std::isnan(likelihood)) {
+        this->likelihood = 0;
+    }
+
+    /* Edge case #2: Inifinite values */
+    else if (std::isinf(likelihood)) {
+        this->likelihood = (likelihood > 0.0) ? 1.0 : 0.0;
+    }
+
+    /* Finite, real value. */
+    else {
+        if (likelihood < 0.0)
+        {
+            this->likelihood = 0.0;
+        } else if (likelihood > 1.0)
+        {
+            this->likelihood = 1.0;
+        } else
+        {
+            this->likelihood = likelihood;
+        }
     }
 }

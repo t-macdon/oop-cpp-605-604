@@ -6,8 +6,11 @@ class IndependentEvent
 public:
 
     /**
-     * @brief Construct a new Independent Event object. Negative numbers will be set to 0.0.
+     * @brief Construct a new Independent Event object.
+     *  Negative numbers will be set to 0.0.
      *  Numbers over 1.0 will be set to 1.0.
+     *  Negative Infinity and NaN map to 0.0.
+     *  Positive Infinity maps to 1.0.
      * 
      * @param likelihood Ranges from 0.0 (never) to 1.0 (certain)
      */

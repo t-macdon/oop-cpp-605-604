@@ -8,11 +8,15 @@
 
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <limits>
 #include "doctest.h"
 #include "IndependentEvent.h"
 
 TEST_CASE("Probability Test Cases")
 {
+    const double quietNaN = std::numeric_limits<double>::quiet_NaN();
+    const double positiveInfinity = std::numeric_limits<double>::infinity();
+    const double negativeInfinity = -(positiveInfinity);
     SUBCASE("Constructor")
     {
         IndependentEvent always(1.0);
@@ -21,6 +25,12 @@ TEST_CASE("Probability Test Cases")
         CHECK(largeAlways.getLikelihood() == 1.0);
         IndependentEvent negativeNever(-100.0);
         CHECK(negativeNever.getLikelihood() == 0.0);
+        IndependentEvent nanEvent(quietNaN);
+        CHECK(nanEvent.getLikelihood() == 0.0);
+        IndependentEvent positiveInfinityEvent(positiveInfinity);
+        CHECK(positiveInfinityEvent.getLikelihood() == 1.0);
+        IndependentEvent negativeInfinityEvent(negativeInfinity);
+        CHECK(negativeInfinityEvent.getLikelihood() == 0.0);
     }
 
     SUBCASE("A and B")
