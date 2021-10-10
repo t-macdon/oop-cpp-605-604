@@ -51,7 +51,7 @@ TEST_CASE("Probability Test Cases")
     {
         IndependentEvent a(0.5);
         IndependentEvent b(0.5);
-        IndependentEvent aAndNotB = a^b;
+        IndependentEvent aAndNotB = a&(~b);
         CHECK(aAndNotB.getLikelihood() == 0.25);
     }
 
