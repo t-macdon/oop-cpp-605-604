@@ -10,4 +10,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     graphviz \
     doxygen \
     cmake \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
+
+RUN python3 -m pip install --no-cache \
+    hpp2plantuml

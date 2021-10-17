@@ -1,0 +1,37 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Generic Plantuml",
+            "type": "shell",
+            "command": "hpp2plantuml",
+            "args":[
+                "-i", "${input:project}/**/*.h",
+                "-o", "${input:project}/docs/design.plantuml",
+            ],
+            "group": "build",
+            "dependsOn": ["Make docs folder"]
+        },
+        {
+            "label": "Make docs folder",
+            "type": "shell",
+            "command": "mkdir -p ${input:project}/docs/"
+        }
+    ],
+    "inputs": [
+        {
+            "type": "pickString",
+            "id": "project",
+            "description": "Which project to use?",
+            "options": [
+                "Probability",
+                "PokerRanking",
+                "TicTacToe",
+                "Statistic",
+            ],
+            "default": "Probability"
+        }
+    ]
+}

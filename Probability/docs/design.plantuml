@@ -1,0 +1,40 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class IndependentEvent {
+	+IndependentEvent(double likelihood)
+	+operator&(const IndependentEvent& event) : IndependentEvent {query}
+	+operator-(const IndependentEvent& event) : IndependentEvent {query}
+	+operator^(const IndependentEvent& event) : IndependentEvent {query}
+	+operator|(const IndependentEvent& event) : IndependentEvent {query}
+	+operator~() : IndependentEvent {query}
+	+getLikelihood() : double {query}
+	-likelihood : double
+	+setLikelihood(const double likelihood) : void
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+
+
+
+/' Aggregation relationships '/
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml
