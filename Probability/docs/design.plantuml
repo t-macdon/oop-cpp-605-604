@@ -19,8 +19,11 @@ class IndependentEvent {
 }
 
 
+class ProbabilityTests {
+	+main()
+}
 
-
+IndependentEvent -left- ProbabilityTests
 
 /' Inheritance relationships '/
 
