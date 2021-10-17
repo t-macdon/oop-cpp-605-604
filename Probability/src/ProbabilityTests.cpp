@@ -17,6 +17,10 @@ TEST_CASE("Probability Test Cases")
     const double quietNaN = std::numeric_limits<double>::quiet_NaN();
     const double positiveInfinity = std::numeric_limits<double>::infinity();
     const double negativeInfinity = -(positiveInfinity);
+    const IndependentEvent a(0.5);
+    const IndependentEvent b(0.5);
+    const IndependentEvent c(0.25);
+    const IndependentEvent d(0.05);
     SUBCASE("Constructor")
     {
         IndependentEvent always(1.0);
@@ -33,42 +37,54 @@ TEST_CASE("Probability Test Cases")
         CHECK(negativeInfinityEvent.getLikelihood() == 0.0);
     }
 
-    SUBCASE("A and B")
+    SUBCASE("And Case")
     {
-        IndependentEvent a(0.5);
-        IndependentEvent b(0.5);
         IndependentEvent aAndB = a&b;
+        IndependentEvent cAndD = c&d;
         CHECK(aAndB.getLikelihood() == 0.25);
+        CHECK(cAndD.getLikelihood() == .0125);
     }
 
-    SUBCASE("A or B")
+    SUBCASE("Or Case")
     {
-        IndependentEvent a(0.5);
-        IndependentEvent b(0.5);
         IndependentEvent aOrB = a|b;
+        IndependentEvent cOrD = c|d;
         CHECK(aOrB.getLikelihood() == 1.0);
+        CHECK(cOrD.getLikelihood() == 0.3);
     }
 
-    SUBCASE("Either A or B but not both")
+    SUBCASE("Exclusive Or Case")
     {
-        IndependentEvent a(0.5);
-        IndependentEvent b(0.5);
         IndependentEvent eitherAOrB = a^b;
         CHECK(eitherAOrB.getLikelihood() == 0.75);
     }
 
-    SUBCASE("A and not B")
+    SUBCASE("Exclusive Case")
     {
-        IndependentEvent a(0.5);
-        IndependentEvent b(0.5);
-        IndependentEvent aAndNotB = a&(~b);
-        CHECK(aAndNotB.getLikelihood() == 0.25);
+        IndependentEvent aAndNotB1 = a-b;
+        IndependentEvent aAndNotB2 = a&(~b);
+        CHECK(aAndNotB1.getLikelihood() == 0.25);
+        CHECK(aAndNotB2.getLikelihood() == 0.25);
     }
 
-    SUBCASE("Not A")
+    SUBCASE("Not Case")
     {
-        IndependentEvent a(0.23);
-        IndependentEvent notA = ~a;
-        CHECK(notA.getLikelihood() == 0.77);
+        IndependentEvent notC = ~c;
+        IndependentEvent notD = ~d;
+        CHECK(notC.getLikelihood() == 0.75);
+        CHECK(notD.getLikelihood() == 0.95);
+    }
+
+    SUBCASE("Self Referencing")
+    {
+        IndependentEvent aAndA = a&a;
+        IndependentEvent aOrA = a|a;
+        IndependentEvent eitherAorA = a^a;
+        IndependentEvent aAndNotA = a-a;
+        const auto aLikelihood = a.getLikelihood();
+        CHECK(aAndA.getLikelihood() == aLikelihood);
+        CHECK(aOrA.getLikelihood() == aLikelihood);
+        CHECK(eitherAorA.getLikelihood() == 0.0);
+        CHECK(aAndNotA.getLikelihood() == 0.0);
     }
 }

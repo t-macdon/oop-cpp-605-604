@@ -18,24 +18,41 @@ IndependentEvent::IndependentEvent(double likelihood)
 
 IndependentEvent IndependentEvent::operator&(const IndependentEvent& event) const
 {
+    // A and A has likelihood of A.
+    if (&event == this) {
+        return *this;
+    }
     double newLikelihood = this->getLikelihood() * event.getLikelihood();
     return IndependentEvent(newLikelihood);
 }
 
 IndependentEvent IndependentEvent::operator|(const IndependentEvent& event) const
 {
+    // A or A has likelihood of A
+    if (&event == this) {
+        return *this;
+    }
     double newLikelihood = this->getLikelihood() + event.getLikelihood();
     return IndependentEvent(newLikelihood);
 }
 
 IndependentEvent IndependentEvent::operator^(const IndependentEvent& event) const
 {
+    // Exclusive odds of A and not A is 0
+    if (&event == this) {
+        return IndependentEvent(0);
+    }
+
     double newLikelihood = this->getLikelihood() + event.getLikelihood() - (this->getLikelihood() * event.getLikelihood());
     return IndependentEvent(newLikelihood);
 }
 
 IndependentEvent IndependentEvent::operator-(const IndependentEvent& event) const
 {
+    // A and Not A occuring is 0
+    if (&event == this) {
+        return IndependentEvent(0);
+    }
     double newLikelihood = this->getLikelihood() - this->getLikelihood() * event.getLikelihood();
     return IndependentEvent(newLikelihood);
 }
