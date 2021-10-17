@@ -24,6 +24,13 @@
             "group": "build"
         },
         {
+            "label": "Create PNG of source code",
+            "type": "shell",
+            "command": "cd ${input:project}/pdf; rm -rf *.png; for f in `find . -name '*.pdf'`; do pdftoppm $f $f.png -png ; done",
+            "group": "build",
+            "dependsOn": "Create PDF of source code"
+        },
+        {
             "label": "Make docs folder",
             "type": "shell",
             "command": "mkdir -p ${input:project}/docs/"

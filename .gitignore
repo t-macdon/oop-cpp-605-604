@@ -54,3 +54,4 @@ _deps
 
 # Documentation artifacts
 **/*.pdf
+**/*.png

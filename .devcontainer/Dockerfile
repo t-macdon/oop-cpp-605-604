@@ -13,6 +13,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     python3-pip \
     neovim \
     ghostscript \
+    poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m pip install --no-cache \
