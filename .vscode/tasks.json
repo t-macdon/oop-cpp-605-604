@@ -15,6 +15,15 @@
             "dependsOn": ["Make docs folder"]
         },
         {
+            "label": "Create PDF of source code",
+            "type": "shell",
+            "command": "${workspaceFolder}/.devcontainer/code_to_pdf.sh",
+            "args": [
+                "${input:project}"
+            ],
+            "group": "build"
+        },
+        {
             "label": "Make docs folder",
             "type": "shell",
             "command": "mkdir -p ${input:project}/docs/"

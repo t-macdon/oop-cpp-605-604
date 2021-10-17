@@ -11,6 +11,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     doxygen \
     cmake \
     python3-pip \
+    neovim \
+    ghostscript \
     && rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m pip install --no-cache \
