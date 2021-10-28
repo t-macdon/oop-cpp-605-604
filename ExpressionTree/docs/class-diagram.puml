@@ -1,0 +1,83 @@
+@startuml Class Diagram
+
+title Class Diagram
+
+class Tree
+{
+    - Node root;
+    __
+    + double evaluate()
+    + Tree derivative(Variable variable)
+    + std::ostream& operator<<(std::ostream& os, const Tree& tree)
+}
+
+abstract class Node
+{
+
+}
+
+abstract class Operation
+{
+    - Node left
+    - Node right
+    __
+    + virtual double evaluate() = 0
+}
+
+class Add
+{
+    __
+    + double evaluate()
+}
+
+class Subtract
+{
+    __
+    + double evaluate()
+}
+
+class Multiply
+{
+    __
+    + double evaluate()
+}
+
+class Divide
+{
+    __
+    + double evaluate()
+}
+
+abstract class Leaf
+{
+    __
+    + virtual double getValue() = 0
+}
+
+class Constant
+{
+    - double value
+    __
+    + double getValue()
+}
+
+class Variable
+{
+    __
+    + double getValue()
+}
+
+
+Node <-- Operation
+Operation <-- Add
+Operation <-- Subtract
+Operation <-- Multiply
+Operation <-- Divide
+
+Node <-- Leaf
+Leaf <-- Constant
+Leaf <-- Variable
+
+Tree --* Node
+
+@enduml
