@@ -2,6 +2,7 @@
 #include <cmath>
 #include "doctest.h"
 #include "Add.h"
+#include "Multiply.h"
 #include "Tree.h"
 #include "Constant.h"
 #include "Variable.h"
@@ -33,4 +34,22 @@ TEST_CASE("Check Derivation") {
 
     CHECK_EQ(t1dx.evaluate(), 2);
     CHECK_EQ(t1dy.evaluate(), 1);
+
+    Tree t2{Multiply{Variable{"X"}, Constant{2}}};
+    Tree t2dx{t2.derivate("X")};
+    Tree t2dy{t2.derivate("Y")};
+    CHECK_EQ(t2dx.evaluate(), 2);
+    CHECK_EQ(t2dy.evaluate(), 0);
+
+    Tree t3{
+        Add{
+            Multiply{Variable{"X"}, Constant{2}},
+            Multiply{Constant{3}, Variable{"Y"}}
+        }
+    };
+    Tree t3dx{t3.derivate("X")};
+    Tree t3dy{t3.derivate("Y")};
+    CHECK_EQ(t3dx.evaluate(), 2);
+    CHECK_EQ(t3dy.evaluate(), 3);
+
 }

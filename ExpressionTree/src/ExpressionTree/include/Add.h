@@ -7,7 +7,6 @@
 class Add : public Operation {
     public:
         Add(const Node& leftNode, const Node& rightNode);
-        ~Add();
         virtual Node* clone() const;
         virtual std::string toString() const;
         virtual double evaluate() const override final;

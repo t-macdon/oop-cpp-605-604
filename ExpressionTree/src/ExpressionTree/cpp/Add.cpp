@@ -7,19 +7,16 @@
 using namespace std;
 
 Add::Add(const Node& leftNode, const Node& rightNode)
-
     : Operation(leftNode, rightNode)
 {
 }
-
-Add::~Add(){ };
 
 Node* Add::derivate(const string& d) const {
     Node* du = getLeftNode()->derivate(d);
     Node* dv = getRightNode()->derivate(d);
     Node* newAdd =  new Add{*du, *dv};
-    free(du);
-    free(dv);
+    delete(du);
+    delete(dv);
     return newAdd;
 }
 
