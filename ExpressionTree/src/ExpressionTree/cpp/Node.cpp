@@ -1,5 +1,9 @@
-
-
 #include "Node.h"
 
-Node::Node() { }
+Node::Node():
+    tree{nullptr}
+{
+    ;
+}
+
+Node::~Node() { }
