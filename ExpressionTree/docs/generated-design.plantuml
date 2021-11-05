@@ -1,0 +1,165 @@
+@startuml Class Diagram
+
+title Class Diagram
+
+
+/' Objects '/
+
+class Add {
+	+Add(const Node& leftNode, const Node& rightNode)
+	+clone() : Node* {query}
+	+derivate(const std::string& d) : Node* {query}
+	+evaluate() : double {query}
+	+toString() : std::string {query}
+}
+
+
+class Constant {
+	+Constant(double value)
+	+~Constant()
+	+clone() : Node* {query}
+	+derivate(const std::string &) : Node* {query}
+	-value : const double
+	+evaluate() : double {query}
+	+toString() : std::string {query}
+}
+
+
+class Divide {
+	+Divide(const Node& leftNode, const Node& rightNode)
+	+clone() : Node* {query}
+	+derivate(const std::string& d) : Node* {query}
+	+evaluate() : double {query}
+	+toString() : std::string {query}
+}
+
+
+class Leaf {
+	+Leaf()
+	+~Leaf()
+}
+
+
+class Multiply {
+	+Multiply(const Node& leftNode, const Node& rightNode)
+	+clone() : Node* {query}
+	+derivate(const std::string& d) : Node* {query}
+	+evaluate() : double {query}
+	+toString() : std::string {query}
+}
+
+
+abstract class Node {
+	+Node()
+	+~Node()
+	+{abstract} clone() : Node* {query}
+	+{abstract} derivate(const std::string &) : Node* {query}
+	+getTree() : Tree* {query}
+	-tree : Tree*
+	+hasTree() : bool {query}
+	+{abstract} evaluate() : double {query}
+	+{abstract} toString() : std::string {query}
+	+copyTree(Node& n) : void {query}
+	+setTree(Tree* tree) : void
+}
+
+
+class Operation {
+	+Operation(const Node& leftNode, const Node& rightNode)
+	+~Operation()
+	+getLeftNode() : Node* {query}
+	+getRightNode() : Node* {query}
+	-leftNode : Node*
+	-rightNode : Node*
+	+setTree(Tree* tree) : void
+}
+
+
+class Subtract {
+	+Subtract(const Node& leftNode, const Node& rightNode)
+	+clone() : Node* {query}
+	+derivate(const std::string& d) : Node* {query}
+	+evaluate() : double {query}
+	+toString() : std::string {query}
+}
+
+
+class Tree {
+	+Tree(const Node& node)
+	+~Tree()
+	-node : Node*
+	+derivate(const std::string& d) : Tree {query}
+	+hasSymbol(const std::string& symbol) : bool {query}
+	+evaluate() : double {query}
+	+getSymbol(const std::string& symbol) : double {query}
+	-symbolTable : std::map<std::string, double>
+	+toString() : std::string {query}
+	+setSymbol(const std::string& symbol, double value) : void
+	+setSymbolTable(const std::map<std::string, double>& symbolTable) : void
+}
+
+
+class Variable {
+	+Variable(std::string varName)
+	+~Variable()
+	+clone() : Node* {query}
+	+derivate(const std::string &) : Node* {query}
+	-varName : const std::string
+	+evaluate() : double {query}
+	+getVariableName() : std::string {query}
+	+toString() : std::string {query}
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+.Leaf <|-- .Constant
+
+
+.Leaf <|-- .Variable
+
+
+.Node <|-- .Leaf
+
+
+.Node <|-- .Operation
+
+
+.Operation <|-- .Add
+
+
+.Operation <|-- .Divide
+
+
+.Operation <|-- .Multiply
+
+
+.Operation <|-- .Subtract
+
+
+
+
+
+/' Aggregation relationships '/
+
+.Node o-- .Tree
+
+
+.Operation "2" o-- .Node
+
+
+.Tree o-- .Node
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml
