@@ -42,12 +42,13 @@
             "id": "project",
             "description": "Which project to use?",
             "options": [
+                "ExpressionTree",
                 "Probability",
                 "PokerRanking",
                 "TicTacToe",
                 "Statistic",
             ],
-            "default": "Probability"
+            "default": "ExpressionTree"
         }
     ]
 }
