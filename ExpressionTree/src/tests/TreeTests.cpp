@@ -29,50 +29,74 @@ TEST_CASE("Evaluate Variables") {
     CHECK(isnan(t2.evaluate()));
 }
 
-TEST_CASE("Check Derivation") {
-    Tree t1 {Add{Add{Variable("X"), Variable("Y")}, Variable("X")}};
-    Tree t1dx {t1.derivate("X")};
-    Tree t1dy {t1.derivate("Y")};
+TEST_CASE("Check Derivation of Addition") {
+    // (X + Y) + X
+    Tree t {Add{Add{Variable("X"), Variable("Y")}, Variable("X")}};
+    Tree tdx {t.derivate("X")};
+    Tree tdy {t.derivate("Y")};
 
-    CHECK_EQ(t1dx.evaluate(), 2);
-    CHECK_EQ(t1dy.evaluate(), 1);
+    CHECK_EQ(tdx.evaluate(), 2);
+    CHECK_EQ(tdy.evaluate(), 1);
+}
 
-    Tree t2{Multiply{Variable{"X"}, Constant{2}}};
-    Tree t2dx{t2.derivate("X")};
-    Tree t2dy{t2.derivate("Y")};
-    CHECK_EQ(t2dx.evaluate(), 2);
-    CHECK_EQ(t2dy.evaluate(), 0);
+TEST_CASE("Check Derivation of Multiplication") {
+    // X*2
+    Tree t{Multiply{Variable{"X"}, Constant{2}}};
+    Tree tdx{t.derivate("X")};
+    Tree tdy{t.derivate("Y")};
 
-    Tree t3{
+    CHECK_EQ(tdx.evaluate(), 2);
+    CHECK_EQ(tdy.evaluate(), 0);
+}
+
+TEST_CASE("Check Derivation of Division") {
+    // (X / 4)
+    Tree t{
+        Divide{Variable{"X"}, Constant{4}}
+    };
+
+    Tree tdx{t.derivate("X")};
+    Tree tdy{t.derivate("Y")};
+    CHECK_EQ(tdx.evaluate(), 0.25);
+    CHECK_EQ(tdy.evaluate(), 0);
+}
+
+TEST_CASE("Check Derivation of Mixed Operators") {
+    // (2*X) + (3*Y)
+    Tree t{
         Add{
             Multiply{Variable{"X"}, Constant{2}},
             Multiply{Constant{3}, Variable{"Y"}}
         }
     };
 
-    Tree t3dx{t3.derivate("X")};
-    Tree t3dy{t3.derivate("Y")};
-    CHECK_EQ(t3dx.evaluate(), 2);
-    CHECK_EQ(t3dy.evaluate(), 3);
+    Tree tdx{t.derivate("X")};
+    Tree tdy{t.derivate("Y")};
+    CHECK_EQ(tdx.evaluate(), 2);
+    CHECK_EQ(tdy.evaluate(), 3);
+}
 
-    Tree t4{
-        Divide{Variable{"X"}, Constant{4}}
-    };
+TEST_CASE("Derivation with Evaluation") {
+    // Example problem given from prompt
+    Tree t = Add(
+        Multiply(Constant(2.3), Variable("X")),
+        Multiply(Variable("Y"),
+        Subtract(Variable("Z"), Variable("X"))));
 
-    Tree t4dx{t4.derivate("X")};
-    Tree t4dy{t4.derivate("Y")};
-    CHECK_EQ(t4dx.evaluate(), 0.25);
-    CHECK_EQ(t4dy.evaluate(), 0);
+    CHECK_EQ(
+        t.toString(),
+        "(((2.3) * (X)) + ((Y) * ((Z) - (X))))"
+    );
 
-    Tree t5{
-        Divide{
-            Multiply{Variable{"X"}, Constant{2}},
-            Multiply{Variable{"Y"}, Constant{3}}
-        }
-    };
+    t.setSymbol("X", 2.0);
+    t.setSymbol("Y", 3.0);
+    t.setSymbol("Z", 5.0);
 
-    Tree t5dx{t5.derivate("X")};
-    Tree t5dy{t5.derivate("Y")};
-    CHECK_EQ(t5dx.evaluate(), 0);
-    CHECK_EQ(t5dy.evaluate(), 0);
+    Tree dt = t.derivate("X");
+    CHECK_EQ(
+        dt.toString(),
+        "((((2.3) * (1)) + ((X) * (0))) + (((Y) * ((0) - (1))) + (((Z) - (X)) * (0))))"
+    );
+
+    CHECK(dt.evaluate() == doctest::Approx(-0.7));
 }

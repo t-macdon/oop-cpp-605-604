@@ -1,6 +1,7 @@
 #ifndef _TREE_H_
 #define _TREE_H_
 
+#include <ostream>
 #include <string>
 #include <map>
 
@@ -14,12 +15,15 @@ class Tree {
         double getSymbol(const std::string& symbol) const;
         void setSymbol(const std::string& symbol, double value);
         bool hasSymbol(const std::string& symbol) const;
+        void setSymbolTable(const std::map<std::string, double>& symbolTable);
         double evaluate() const;
-        Node& derivate(const std::string& d) const;
+        Tree derivate(const std::string& d) const;
         std::string toString() const;
     private:
         std::map<std::string, double> symbolTable;
         Node* node;
 };
+
+std::ostream& operator<<(std::ostream& os, const Tree& tree);
 
 #endif // _TREE_H_

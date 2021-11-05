@@ -2,6 +2,7 @@
 #ifndef _NODE_H_
 #define _NODE_H_
 
+#include <ostream>
 #include <string>
 
 // Forward declaration of class Tree.
@@ -26,5 +27,7 @@ class Node {
         Tree* tree;
 
 };
+
+std::ostream& operator<<(std::ostream& os, const Node& node);
 
 #endif // _NODE_H_

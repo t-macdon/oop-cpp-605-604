@@ -1,3 +1,4 @@
+#include <ostream>
 #include <string>
 #include "Operation.h"
 #include "Tree.h"
@@ -16,6 +17,11 @@ Tree::~Tree() {
     this->node = nullptr;
 }
 
+ostream& operator<<(ostream& os, const Tree& tree) {
+    os << tree.toString();
+    return os;
+}
+
 double Tree::evaluate() const {
     return node->evaluate();
 }
@@ -24,8 +30,14 @@ string Tree::toString() const {
     return node->toString();
 }
 
-Node& Tree::derivate(const std::string& d) const {
-    return *node->derivate(d);
+Tree Tree::derivate(const std::string& d) const {
+    Tree derivedTree{*node->derivate(d)};
+    derivedTree.setSymbolTable(this->symbolTable);
+    return derivedTree;
+}
+
+void Tree::setSymbolTable(const std::map<std::string, double>& symbolTable) {
+    this->symbolTable = symbolTable;
 }
 
 double Tree::getSymbol(const string& symbol) const {
