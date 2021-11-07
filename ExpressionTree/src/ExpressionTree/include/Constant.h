@@ -1,3 +1,11 @@
+/**
+ * @file Constant.h
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Support for a Constant Leaf
+ * @version 0.1
+ * @date 2021-11-07
+ */
+
 #ifndef _CONSTANT_H_
 #define _CONSTANT_H_
 

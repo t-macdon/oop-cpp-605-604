@@ -1,3 +1,11 @@
+/**
+ * @file Operation.h
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Virtual class for Operation support. Operations are Nodes and belong to a Tree.
+ * @version 0.1
+ * @date 2021-11-07
+ */
+
 #ifndef _OPERATION_H_
 #define _OPERATION_H_
 

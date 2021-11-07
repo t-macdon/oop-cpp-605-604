@@ -1,3 +1,11 @@
+/**
+ * @file Multiply.h
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Support for the Multiply Operation
+ * @version 0.1
+ * @date 2021-11-07
+ */
+
 #ifndef _MULTIPLY_H_
 #define _MULTIPLY_H_
 

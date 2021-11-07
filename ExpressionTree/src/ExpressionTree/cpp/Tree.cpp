@@ -1,3 +1,11 @@
+/**
+ * @file Tree.cpp
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Implementation file for the Tree class
+ * @version 0.1
+ * @date 2021-11-07
+ */
+
 #include <ostream>
 #include <string>
 #include "Operation.h"

@@ -1,3 +1,11 @@
+/**
+ * @file Divide.cpp
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Implementation file for the Divide class
+ * @version 0.1
+ * @date 2021-11-07
+ */
+
 #include <limits>
 #include <string>
 #include <sstream>

@@ -1,3 +1,11 @@
+/**
+ * @file Constant.cpp
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Implementation file for the Constant class
+ * @version 0.1
+ * @date 2021-11-07
+ */
+
 #include <string>
 #include <sstream>
 #include "Constant.h"

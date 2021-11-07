@@ -1,3 +1,11 @@
+/**
+ * @file Operation.cpp
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Implementation file for the Operation class
+ * @version 0.1
+ * @date 2021-11-07
+ */
+
 #include <memory>
 #include "Tree.h"
 #include "Node.h"

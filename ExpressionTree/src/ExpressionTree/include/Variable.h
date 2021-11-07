@@ -1,3 +1,11 @@
+/**
+ * @file Variable.h
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Support for a Variable Leaf which is looked up in the symbol table
+ * @version 0.1
+ * @date 2021-11-07
+ */
+
 #ifndef _VARIABLE_H_
 #define _VARIABLE_H_
 

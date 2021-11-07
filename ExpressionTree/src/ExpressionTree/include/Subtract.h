@@ -1,3 +1,11 @@
+/**
+ * @file Subtract.h
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Support for the Subtract Operation
+ * @version 0.1
+ * @date 2021-11-07
+ */
+
 #ifndef _SUBTRACT_H_
 #define _SUBTRACT_H_
 

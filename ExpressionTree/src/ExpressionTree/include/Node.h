@@ -1,3 +1,10 @@
+/**
+ * @file Node.h
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Virtual class representing a Node. Classes inheriting Node can belong to a Tree.
+ * @version 0.1
+ * @date 2021-11-07
+ */
 
 #ifndef _NODE_H_
 #define _NODE_H_

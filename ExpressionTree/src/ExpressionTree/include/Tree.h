@@ -1,3 +1,11 @@
+/**
+ * @file Tree.h
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Data structure comprised of Nodes. These nodes are traversed and interpreted based on the Tree method called.
+ * @version 0.1
+ * @date 2021-11-07
+ */
+
 #ifndef _TREE_H_
 #define _TREE_H_
 
