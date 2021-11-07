@@ -13,7 +13,17 @@
 
 class Leaf : public Node {
     public: 
+
+        /**
+         * @brief Construct a new Leaf object
+         * 
+         */
         Leaf();
+
+        /**
+         * @brief Destroy the Leaf object
+         * 
+         */
         virtual ~Leaf();
 };
 

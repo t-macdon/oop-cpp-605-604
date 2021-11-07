@@ -15,19 +15,54 @@ class Tree;
 
 class Operation : public Node {
     public:
-        Operation(const Node& leftNode, const Node& rightNode);
-        virtual ~Operation();
-        virtual void setTree(Tree* tree) override;
 
-        // TODO: Replace these with weak ptr or something
-        // Also, could assign some const-ness to return type?
+        /**
+         * @brief Construct a new Operation object
+         * 
+         * @param leftNode Reference to the lefthand side of this operator
+         * @param rightNode Reference to the righthand side of this operator
+         */
+        Operation(const Node& leftNode, const Node& rightNode);
+
+        /**
+         * @brief Destroy the Operation object
+         * 
+         */
+        virtual ~Operation();
+
+        /**
+         * @brief Set the Tree object
+         * 
+         * @param tree 
+         */
+        virtual void setTree(Tree* tree) override;
+        
+        /**
+         * @brief Get the Left Node object
+         * 
+         * @return Node* 
+         */
         Node* getLeftNode() const { return this->leftNode; }
+
+        /**
+         * @brief Get the Right Node object
+         * 
+         * @return Node* 
+         */
         Node* getRightNode() const { return this->rightNode; }
+
     private:
-        // TODO: Figure out how to replace these
-        // with something that implicitly takes care of ownership,
-        // like shared_ptr or unique_ptr
+    
+        /**
+         * @brief Pointer to the lefthand Node
+         * 
+         */
         Node* leftNode;
+
+        /**
+         * @brief Pointer to the righthand Node
+         * 
+         */
         Node* rightNode;
 };
 
