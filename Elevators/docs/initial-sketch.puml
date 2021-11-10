@@ -1,0 +1,41 @@
+@startuml Elevators Initial Sketch
+
+title Elevators Initial Sketch
+
+class Elevator
+{
+    + static const int CAPACITY = 8
+    + static const int STOPPING_TIME = 2
+    + static const int FLOOR_TIME = 10
+    + enum class Status {STOPPED, STOPPING, MOVING_UP, MOVING_DOWN}
+    + boolean hasPassengerOnBoard()
+    + Passenger getMostRecentPassenger()
+    __
+    - std::queue <Passenger> passengers
+}
+
+class Floor
+{
+    + boolean hasPassengerWaiting()
+    + Passenger getMostRecentPassenger()
+    __
+    - std::queue <Passenger> passengers
+}
+
+class Passenger
+{
+    + Passenger(Floor &startFloor, Floor &endFloor)
+    + Floor getStartFloor()
+    + Floor getEndFloor()
+    __
+    - Floor startFloor
+    - Floor endFloor
+}
+
+class ElevatorSimulation
+{
+    __
+
+}
+
+@enduml
