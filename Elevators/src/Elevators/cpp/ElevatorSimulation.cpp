@@ -1,5 +1,8 @@
 
+#include <array>
+#include <fstream>
 #include <iostream>
+#include <sstream>
 #include <queue>
 #include <vector>
 
@@ -8,8 +11,69 @@
 #include "Passenger.hpp"
 #include "PassengerCreationEvent.hpp"
 
+static const char CSV_DELIMETER = ',';
+
+std::queue<PassengerCreationEvent> loadEventsFromCSV(const std::string &pathToCSV)
+{
+    std::queue<PassengerCreationEvent> events;
+
+    std::string row;
+    std::ifstream eventsFile(pathToCSV);
+
+    if (eventsFile.is_open())
+    {
+        // process each row in file
+        bool header = true;
+        while ( getline( eventsFile, row ) )
+        {
+            // skip the first header line
+            if (header)
+            {
+                header = false;
+                continue;
+            }
+
+            // parse row into data
+            std::stringstream ss(row);
+            std::string csvColumn;
+            std::vector<std::string> rowData;
+            while ( getline( ss, csvColumn, CSV_DELIMETER ) )
+            {
+                rowData.push_back(csvColumn);
+            }
+            
+            // convert row data into event object
+            PassengerCreationEvent event(
+                stoi(rowData.at(0)),
+                stoi(rowData.at(1)),
+                stoi(rowData.at(2))
+            );
+            events.push(event);
+        }
+        eventsFile.close();
+    }
+
+    return events;
+}
 
 int main()
+{
+    const std::string eventsDataPath = "/workspaces/oop-cpp-605-604/Elevators/elevator_data.csv";
+    std::queue<PassengerCreationEvent> events = loadEventsFromCSV(eventsDataPath);
+    PassengerCreationEvent curEvent;
+    while (!events.empty())
+    {
+        // get next event
+        curEvent = events.front();
+        events.pop();
+
+        // print it
+        std::cout << curEvent.startTime << "," << curEvent.startFloorID << "," << curEvent.endFloorID << std::endl;
+    }
+    return 0;
+}
+
+int main2()
 {
     // create all the floors
     std::vector<Floor> floors;
@@ -32,7 +96,7 @@ int main()
     events.push(PassengerCreationEvent(88,87,32));
 
     // quit loop when no more events and no more passengers exist
-    int simulationTime = 0;
+    unsigned int simulationTime = 0;
     std::vector<Passenger> passengers;
     // TODO: we can probably just determine which floor an empty elevator goes to next
     // by looking at order of events... just pick the floor with the most recent event to target
