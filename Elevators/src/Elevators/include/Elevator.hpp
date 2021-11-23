@@ -3,9 +3,6 @@
 
 #include <queue>
 
-#include "Passenger.hpp"
-#include "Floor.hpp"
-
 class Elevator
 {
 public:
@@ -19,7 +16,7 @@ public:
 private:
     void updateTargetFloor();
 
-    std::queue<Passenger> passengers;
+    std::queue<unsigned int> passengers;
     int currentFloorID;
     int targetFloorID;
     State state = State::STOPPED;

@@ -7,8 +7,6 @@
 #include <vector>
 
 #include "Elevator.hpp"
-#include "Floor.hpp"
-#include "Passenger.hpp"
 #include "PassengerCreationEvent.hpp"
 
 static const char CSV_DELIMETER = ',';
@@ -58,72 +56,56 @@ std::queue<PassengerCreationEvent> loadEventsFromCSV(const std::string &pathToCS
 
 int main()
 {
+    // load event data
     const std::string eventsDataPath = "/workspaces/oop-cpp-605-604/Elevators/elevator_data.csv";
     std::queue<PassengerCreationEvent> events = loadEventsFromCSV(eventsDataPath);
-    PassengerCreationEvent curEvent;
-    while (!events.empty())
-    {
-        // get next event
-        curEvent = events.front();
-        events.pop();
+    std::cout << "Events go from time " << events.front().startTime << " to " << events.back().startTime << std::endl;
 
-        // print it
-        std::cout << curEvent.startTime << "," << curEvent.startFloorID << "," << curEvent.endFloorID << std::endl;
-    }
-    return 0;
-}
-
-int main2()
-{
-    // create all the floors
-    std::vector<Floor> floors;
+    // create the floors
+    // floors are just Passenger queues at a specific index
+    // passengers are just their target floors
+    std::vector<std::queue<unsigned int>> floors;
     for (int i = 0; i < 100; i++)
     {
-        floors.push_back(Floor(i));
+        floors.push_back(std::queue<unsigned int>());
     }
 
-    // create 4 elevators
-    std::vector<Elevator> elevators;
-    for (int i = 0; i < 4; i++)
-    {
-        elevators.push_back(Elevator(0));
-    }
-
-    // TODO: load all events from csv file
-    std::queue<PassengerCreationEvent> events;
-    events.push(PassengerCreationEvent(41,54,55));
-    events.push(PassengerCreationEvent(43,30,74));
-    events.push(PassengerCreationEvent(88,87,32));
-
-    // quit loop when no more events and no more passengers exist
+    // one unit of time per loop iteration
     unsigned int simulationTime = 0;
-    std::vector<Passenger> passengers;
-    // TODO: we can probably just determine which floor an empty elevator goes to next
-    // by looking at order of events... just pick the floor with the most recent event to target
-    while (!events.empty() || !passengers.empty())
-    {
-        // check if we should process an event
-        if (!events.empty())
-        {
-            PassengerCreationEvent nextEvent = events.front();
-            if (nextEvent.startTime == simulationTime)
-            {
-                // create passenger for the event
-                Passenger newPassenger(nextEvent.startFloorID, nextEvent.endFloorID);
-                passengers.push_back(newPassenger);
-                floors.at(nextEvent.startFloorID).addPassengerToQueue(newPassenger);
 
-                // pop the event off the queue
-                events.pop();
-            }
+    // maintains the next event
+    PassengerCreationEvent curEvent;
+
+    // event loop
+    // goes until we have no more events, all floors are empty, and all elevators are empty
+    while (!events.empty())
+    {
+        // look at next event, but only process it if we have the right simulation time
+        curEvent = events.front();
+        if (simulationTime >= curEvent.startTime)
+        {
+            // process event by putting the passenger (ie target floor) on the correct floor
+            floors.at(curEvent.startFloorID).push(curEvent.endFloorID);
+
+            std::cout << "[Time: " << curEvent.startTime << "] Passenger starting at floor " << curEvent.startFloorID << " with a target floor of " << curEvent.endFloorID << std::endl;
+
+            // remove the event from the queue since it's been processed
+            events.pop();
+
+            std::cout << events.size() << " events left" << std::endl;
         }
 
-        // TODO: update elevators
 
-        // update sim time
+        // loop is over so increment the simulation time
         simulationTime++;
     }
-    
-    std::cout << "HELLO WORLD" << std::endl;
+
+    int counter = 0;
+    for (std::queue<unsigned int> &floor : floors)
+    {
+        std::cout << "Floor at " << counter << " has " << floor.size() << " passengers waiting" << std::endl;
+        counter++;
+    }
+
     return 0;
 }

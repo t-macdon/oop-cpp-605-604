@@ -22,8 +22,6 @@ set(SOURCE
 
 set(HEADERS
     src/Elevators/include/Elevator.hpp
-    src/Elevators/include/Floor.hpp
-    src/Elevators/include/Passenger.hpp
     src/Elevators/include/PassengerCreationEvent.hpp
 )
 
