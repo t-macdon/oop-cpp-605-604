@@ -70,6 +70,11 @@ int main()
         floors.push_back(std::queue<unsigned int>());
     }
 
+    // create the elevators
+    // all elevators start on the ground floor
+    std::vector<Elevator> elevators;
+    elevators.push_back(Elevator(0));
+
     // one unit of time per loop iteration
     unsigned int simulationTime = 0;
 
@@ -95,6 +100,11 @@ int main()
             std::cout << events.size() << " events left" << std::endl;
         }
 
+        // TODO: Update each elevator, probably should do this in the elevator class
+        for (Elevator &elevator : elevators)
+        {
+            
+        }
 
         // loop is over so increment the simulation time
         simulationTime++;
