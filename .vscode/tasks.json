@@ -8,8 +8,9 @@
             "type": "shell",
             "command": "hpp2plantuml",
             "args":[
-                "-i", "${input:project}/**/*.h",
-                "-o", "${input:project}/docs/design.plantuml",
+                "-i", "\"${input:project}/**/*.hpp\"",
+                "-i", "\"${input:project}/**/*.h\"",
+                "-o", "\"${input:project}/docs/design.plantuml\"",
             ],
             "group": "build",
             "dependsOn": ["Make docs folder"]
@@ -42,13 +43,14 @@
             "id": "project",
             "description": "Which project to use?",
             "options": [
+                "Elevators",
                 "ExpressionTree",
                 "Probability",
                 "PokerRanking",
                 "TicTacToe",
                 "Statistic",
             ],
-            "default": "ExpressionTree"
+            "default": "Elevators"
         }
     ]
 }
