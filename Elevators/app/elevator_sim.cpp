@@ -5,7 +5,7 @@
 #include "Simulation.hpp"
 #include "Summary.hpp"
 
-const std::string CSVPath = "/projects/python/elevators/elevators_data_large.csv";
+const std::string CSVPath = "/workspaces/oop-cpp-605-604/Elevators/elevators_data_large.csv";
 
 Summary runSim(int numElevators, int numFloors, int elevatorSpeed)
 {
