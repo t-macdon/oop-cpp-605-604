@@ -1,0 +1,20 @@
+
+@startuml Elevators2
+
+class Utilities {
+	+{static} CSV_DELIMETER : static const char
+	+{static} loadEventsFromCSV(const std::string& CSVPath) : std::queue<Event>
+}
+
+
+class Summary {
+	+Summary(float averageTimeSpentWaiting, float averageTimeSpentTravelling, int totalSimulationTime)
+	+mAverageTimeSpentTravelling : const float
+	+mAverageTimeSpentWaiting : const float
+	+mTotalSimulationTime : const int
+	+toString() : std::string {query}
+}
+
+
+
+@enduml

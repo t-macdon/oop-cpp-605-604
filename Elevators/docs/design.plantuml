@@ -1,7 +1,4 @@
-@startuml
-
-
-
+@startuml Elevators
 
 
 /' Objects '/
@@ -60,12 +57,6 @@ class Simulation {
 }
 
 
-class Utilities {
-	+{static} CSV_DELIMETER : static const char
-	+{static} loadEventsFromCSV(const std::string& CSVPath) : std::queue<Event>
-}
-
-
 enum ElevatorStates {
 	MOVING_DOWN
 	MOVING_UP
@@ -91,16 +82,6 @@ class Passenger {
 	+mTimeSpentWaiting : int
 	+toString() : std::string {query}
 }
-
-
-class Summary {
-	+Summary(float averageTimeSpentWaiting, float averageTimeSpentTravelling, int totalSimulationTime)
-	+mAverageTimeSpentTravelling : const float
-	+mAverageTimeSpentWaiting : const float
-	+mTotalSimulationTime : const int
-	+toString() : std::string {query}
-}
-
 
 
 
