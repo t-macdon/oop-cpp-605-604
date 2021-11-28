@@ -1,0 +1,10 @@
+- 4 elevators
+- 100 floors
+- elevator states: STOPPED, STOPPING, MOVING_UP, MOVING_DOWN
+- if an elevator is 2 seconds away from its target, it transitions to STOPPING
+- elevators take 10 seconds to move between floors
+- 8 passengers are allowed in an elevator
+- 1 loop is 1 second
+- if STOPPED and current time is >= next start time, elevator moves up or down to pick up the passenger
+- if passenger is on the way, elevator stops to pick them up if it has capacity
+- when stopped, if any passenger has that floor as a target they disembark

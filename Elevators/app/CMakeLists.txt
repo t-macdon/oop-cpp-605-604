@@ -1,0 +1,3 @@
+add_executable(elevator_sim elevator_sim.cpp)
+target_link_libraries(elevator_sim PRIVATE ElevatorLibrary)
+target_include_directories(elevator_sim PRIVATE ${PROJECT_INCLUDE_DIR})

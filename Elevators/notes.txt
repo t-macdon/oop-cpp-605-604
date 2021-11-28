@@ -1,0 +1,34 @@
+
+    // passenger test
+    Passenger pass(0, 10);
+    std::cout << pass << std::endl;
+
+    // summary test
+    Summary summ(0, 0, 100);
+    std::cout << summ << std::endl;
+
+    // event test
+    Event event(41, 30, 35);
+    std::cout << event << std::endl;
+
+    // floor test
+    Floor floor(0);
+    floor.addPassenger(10);
+    floor.addPassenger(12);
+    std::cout << floor << std::endl;
+
+    Passenger passenger1 = floor.popNextPassengerInLine();
+    std::cout << passenger1 << std::endl;
+    std::cout << floor << std::endl;
+    Passenger passenger2 = floor.popNextPassengerInLine();
+    std::cout << passenger2 << std::endl;
+    std::cout << floor << std::endl;
+
+    // utilities test
+    const std::string CSVPath = "/projects/python/elevators/prototype/elevators_data_small.csv";
+    std::queue<Event> events = Utilities::loadEventsFromCSV(CSVPath);
+    std::cout << "Loaded " << events.size() << " events" << std::endl;
+
+
+    averageTimeSpentWaiting=414.75, averageTimeSpentTravelling=151.0, totalSimulationTime=997]
+    mAverageTimeSpentWaiting=852.25, mAverageTimeSpentTravelling=301, mTotalSimulationTime=0

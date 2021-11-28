@@ -1,0 +1,9 @@
+#ifndef ELEVATORSTATES_HPP
+#define ELEVATORSTATES_HPP
+
+enum class ElevatorStates
+{
+    STOPPED, STOPPING, MOVING_UP, MOVING_DOWN
+};
+
+#endif // ELEVATORSTATES_HPP

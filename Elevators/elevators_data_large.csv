@@ -1,4 +1,4 @@
-Start Time(s),Start Floor,End Floor
+start_time,start_floor,end_floor
 41,54,55
 43,30,74
 88,87,32
