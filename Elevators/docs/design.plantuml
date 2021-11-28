@@ -1,0 +1,122 @@
+@startuml Elevators
+
+
+/' Objects '/
+
+class Elevator {
+	+Elevator(int speed)
+	-determineDirection() : ElevatorStates
+	-mState : ElevatorStates
+	+hasPassengersTravelling() : bool
+	-getFirstFloorWithWaitingPassengers(Simulation& simulation) : int
+	-mCurrentFloorID : int
+	-mSpeed : int
+	-mTargetFloorID : int
+	-mTimeSpentMoving : int
+	+{static} CAPACITY : static const int
+	+toString() : std::string {query}
+	-mPassengerList : std::vector<Passenger>
+	-handleMovingDownState() : void
+	-handleMovingUpState() : void
+	-handleNewFloor() : void
+	-handleStoppedState(Simulation& simulation) : void
+	+update(Simulation& simulation) : void
+}
+
+
+class Floor {
+	+Floor(int identifier)
+	+getNextInLine() : Passenger
+	+popNextPassengerInLine() : Passenger
+	+hasPassengersWaiting() : bool
+	-mIdentifier : int
+	+toString() : std::string {query}
+	-mPassengerList : std::vector<Passenger>
+	+addPassenger(int targetFloorID) : void
+	+incrementAllTimeWaiting() : void
+}
+
+
+class Simulation {
+	+Simulation(int numberOfElevators, int numberOfFloors, int elevatorSpeed, const std::string CSVPath)
+	+popPassengerFromFloor(int floorID) : Passenger
+	+run() : Summary
+	+floorHasPassengersWaiting(int floorID) : bool
+	-isSimulationRunning() : bool
+	+getAverageTimeSpentTravelling() : float
+	+getAverageTimeSpentWaiting() : float
+	+getNumberOfFloors() : int
+	-mElapsedSimulationTime : int
+	-mEventQueue : std::queue<Event>
+	-mElevatorList : std::vector<Elevator>
+	-mFloorList : std::vector<Floor>
+	-mTimeSpentTravellingList : std::vector<int>
+	-mTimeSpentWaitingList : std::vector<int>
+	+addTimeSpentTravelling(int timeSpentTravelling) : void
+	+addTimeSpentWaiting(int timeSpentWaiting) : void
+}
+
+
+enum ElevatorStates {
+	MOVING_DOWN
+	MOVING_UP
+	STOPPED
+	STOPPING
+}
+
+
+class Event {
+	+Event(int startTime, int startFloor, int endFloor)
+	+mEndFloor : int
+	+mStartFloor : int
+	+mStartTime : int
+	+toString() : std::string {query}
+}
+
+
+class Passenger {
+	+Passenger(int startFloorID, int targetFloorID)
+	+mStartFloorID : int
+	+mTargetFloorID : int
+	+mTimeSpentTravelling : int
+	+mTimeSpentWaiting : int
+	+toString() : std::string {query}
+}
+
+
+
+
+/' Inheritance relationships '/
+
+
+
+
+/' Aggregation relationships '/
+
+.Elevator *-- .ElevatorStates
+
+
+.Elevator *-- .Passenger
+
+
+.Floor *-- .Passenger
+
+
+.Simulation *-- .Elevator
+
+
+.Simulation *-- .Event
+
+
+.Simulation *-- .Floor
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml
