@@ -51,13 +51,25 @@ void Elevator::update(Simulation &simulation)
         handleStoppedState(simulation);
     } else if (mState == ElevatorStates::STOPPING)
     {
-
+        handleStoppingState();
     } else if (mState == ElevatorStates::MOVING_DOWN)
     {
         handleMovingDownState();
     } else if (mState == ElevatorStates::MOVING_UP)
     {
         handleMovingUpState();
+    }
+}
+
+void Elevator::handleStoppingState()
+{
+    if (mTimeSpentStopping % STOPPING_TIME == 0)
+    {
+        mTimeSpentStopping = 0;
+        mState = ElevatorStates::STOPPED;
+    } else
+    {
+        mTimeSpentStopping += 1;
     }
 }
 
@@ -139,16 +151,16 @@ void Elevator::handleNewFloor()
 {
     if (mCurrentFloorID == mTargetFloorID)
     {
-        // stop the elevator if we have arrived
-        mState = ElevatorStates::STOPPED;
+        // start stopping the elevator if we have arrived
+        mState = ElevatorStates::STOPPING;
     } else
     {
-        // if any passengers can get off on this floor, stop the elevator
+        // if any passengers can get off on this floor, start stopping the elevator
         for (Passenger &passenger : mPassengerList)
         {
             if (passenger.mTargetFloorID == mCurrentFloorID)
             {
-                mState = ElevatorStates::STOPPED;
+                mState = ElevatorStates::STOPPING;
             }
         }
     }

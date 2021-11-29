@@ -29,6 +29,12 @@ public:
     static const int CAPACITY = 8;
 
     /**
+     * @brief How many seconds the Elevator needs to spend STOPPING before it can transition to STOPPED
+     * 
+     */
+    static const int STOPPING_TIME = 2;
+
+    /**
      * @brief Construct a new Elevator object
      * 
      * @param speed How many seconds it takes for an elevator to travel between floors
@@ -94,10 +100,22 @@ private:
     int mTimeSpentMoving = 0;
 
     /**
+     * @brief How many seconds have elapsed since the Elevator began stopping
+     * 
+     */
+    int mTimeSpentStopping = 0;
+
+    /**
      * @brief Collection of all Passengers currently riding the Elevator
      * 
      */
     std::vector<Passenger> mPassengerList;
+
+    /**
+     * @brief Handles the Elevator stopping for STOPPING_TIME seconds before becoming STOPPED
+     * 
+     */
+    void handleStoppingState();
 
     /**
      * @brief Handles embarking/disembarking Passengers and transitioning to the appropriate movement state
