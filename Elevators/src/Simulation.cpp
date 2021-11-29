@@ -1,3 +1,10 @@
+/**
+ * @file Simulation.cpp
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Implementation file for the Simulation class
+ * @version 0.1
+ * @date 2021-11-28
+ */
 
 #include <iostream>
 

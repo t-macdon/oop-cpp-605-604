@@ -1,3 +1,11 @@
+/**
+ * @file Utilities.cpp
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Implementation file for the Utilities class
+ * @version 0.1
+ * @date 2021-11-28
+ */
+
 #include <fstream>
 
 #include "Utilities.hpp"

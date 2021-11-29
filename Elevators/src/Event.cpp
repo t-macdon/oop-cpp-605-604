@@ -1,3 +1,11 @@
+/**
+ * @file Event.cpp
+ * @author Michael Schumacher, Tyler MacDonald
+ * @brief Implementation file for the Event class
+ * @version 0.1
+ * @date 2021-11-28
+ */
+
 #include "Event.hpp"
 
 std::string Event::toString() const {
