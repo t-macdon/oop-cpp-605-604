@@ -1,4 +1,7 @@
-@startuml Elevators
+@startuml
+
+
+
 
 
 /' Objects '/
@@ -13,20 +16,22 @@ class Elevator {
 	-mSpeed : int
 	-mTargetFloorID : int
 	-mTimeSpentMoving : int
+	-mTimeSpentStopping : int
 	+{static} CAPACITY : static const int
+	+{static} STOPPING_TIME : static const int
 	+toString() : std::string {query}
 	-mPassengerList : std::vector<Passenger>
 	-handleMovingDownState() : void
 	-handleMovingUpState() : void
 	-handleNewFloor() : void
 	-handleStoppedState(Simulation& simulation) : void
+	-handleStoppingState() : void
 	+update(Simulation& simulation) : void
 }
 
 
 class Floor {
 	+Floor(int identifier)
-	+getNextInLine() : Passenger
 	+popNextPassengerInLine() : Passenger
 	+hasPassengersWaiting() : bool
 	-mIdentifier : int
@@ -43,8 +48,8 @@ class Simulation {
 	+run() : Summary
 	+floorHasPassengersWaiting(int floorID) : bool
 	-isSimulationRunning() : bool
-	+getAverageTimeSpentTravelling() : float
-	+getAverageTimeSpentWaiting() : float
+	-getAverageTimeSpentTravelling() : float
+	-getAverageTimeSpentWaiting() : float
 	+getNumberOfFloors() : int
 	-mElapsedSimulationTime : int
 	-mEventQueue : std::queue<Event>
@@ -54,6 +59,12 @@ class Simulation {
 	-mTimeSpentWaitingList : std::vector<int>
 	+addTimeSpentTravelling(int timeSpentTravelling) : void
 	+addTimeSpentWaiting(int timeSpentWaiting) : void
+}
+
+
+class Utilities {
+	+{static} CSV_DELIMETER : static const char
+	+{static} loadEventsFromCSV(const std::string& CSVPath) : std::queue<Event>
 }
 
 
@@ -82,6 +93,16 @@ class Passenger {
 	+mTimeSpentWaiting : int
 	+toString() : std::string {query}
 }
+
+
+class Summary {
+	+Summary(float averageTimeSpentWaiting, float averageTimeSpentTravelling, int totalSimulationTime)
+	+mAverageTimeSpentTravelling : const float
+	+mAverageTimeSpentWaiting : const float
+	+mTotalSimulationTime : const int
+	+toString() : std::string {query}
+}
+
 
 
 
