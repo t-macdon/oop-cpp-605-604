@@ -10,5 +10,5 @@ file (GLOB TEST_SOURCE *.cpp)
 
 # create test executable
 add_executable(PokerTest ${TEST_SOURCE})
-target_include_directories(PokerTest PRIVATE ${DOCTEST_INCLUDE_DIRS} ${EXPRESSION_TREE_INCLUDE_DIRS})
+target_include_directories(PokerTest PRIVATE ${DOCTEST_INCLUDE_DIRS} ${POKER_INCLUDE_DIRS})
 target_link_libraries(PokerTest PRIVATE PokerLibrary)
