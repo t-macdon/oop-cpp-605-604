@@ -40,6 +40,13 @@ public:
     };
 
     /**
+     * @brief Return this hand's category as a string
+     * 
+     * @return std::string 
+     */
+    std::string categoryAsString() const;
+
+    /**
      * @brief Construct a new Hand object
      */
     Hand();

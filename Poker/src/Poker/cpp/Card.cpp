@@ -6,6 +6,7 @@
  * @date 2021-09-22
  */
 
+#include <ostream>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -92,6 +93,12 @@ Card::Card(string str) :
 {
 }
 
+Card::Card(CardValue value, Suit suit) : 
+    value{value},
+    suit{suit}
+{
+}
+
 int Card::operator-(const Card& v1) const {
     return (this->getValue() - v1.getValue());
 }
@@ -114,4 +121,9 @@ bool Card::operator<(const Card& v1) const {
 
 bool Card::operator>(const Card& v1) const {
     return (this->getValue() > v1.getValue());
+}
+
+ostream& operator<<(ostream& os, const Card& card) {
+    os << card.toString();
+    return os;
 }

@@ -9,6 +9,7 @@
 #ifndef CARD_H
 #define CARD_H
 
+#include <ostream>
 #include <string>
 #include "CardValue.h"
 
@@ -28,6 +29,13 @@ class Card {
             SPADE,
         };
 
+        inline static constexpr std::array<Suit, 4> ALL_SUITS {
+            Suit::HEART,
+            Suit::DIAMOND,
+            Suit::CLUB,
+            Suit::SPADE
+        };
+
         /**
          * @brief Construct a new Card object
          * Will call the constructor for CardValue
@@ -35,6 +43,14 @@ class Card {
          * Throws runtime error if no card can be created
          */
         Card(std::string);
+
+        /**
+         * @brief Construct a new Card object
+         * 
+         * @param value 
+         * @param suit
+         */
+        Card(CardValue value, Suit suit);
 
         /**
          * @brief Get the Suit object
@@ -93,6 +109,7 @@ class Card {
          * @param v1 
          */
         bool operator>(const Card& v1) const;
+
     private:
 
         /**
@@ -113,5 +130,16 @@ class Card {
         CardValue value;
         Suit suit;
 };
+
+
+/**
+ * @brief Ostream operator for the card class
+ * Uses the toString method for formatting
+ * 
+ * @param os 
+ * @param card 
+ * @return std::ostream& 
+ */
+std::ostream& operator<<(std::ostream& os, const Card& card);
 
 #endif // end of CARD_H

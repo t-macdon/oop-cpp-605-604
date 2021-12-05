@@ -19,6 +19,32 @@ Hand::Hand() : handVector(), pairCounter()
 {
 }
 
+string Hand::categoryAsString() const {
+    switch(getCategory()) {
+        case Category::HIGH_CARD:
+            return "High Card";
+        case Category::TWO_OF_A_KIND:
+            return "Two Of A Kind";
+        case Category::TWO_PAIR:
+            return "Two Pairs";
+        case Category::THREE_OF_A_KIND:
+            return "Three Of A Kind";
+        case Category::STRAIGHT:
+            return "Straight";
+        case Category::FLUSH:
+            return "Flush";
+        case Category::FULL_HOUSE:
+            return "Full House";
+        case Category::FOUR_OF_A_KIND:
+            return "Four Of A Kind";
+        case Category::STRAIGHT_FLUSH:
+            return "Straight Flush";
+        case Category::INCOMPLETE:
+        default:
+            return "INCOMPLETE";
+    }
+}
+
 string Hand::toString() const
 {
     stringstream ss;
