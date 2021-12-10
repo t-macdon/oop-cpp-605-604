@@ -23,6 +23,11 @@ Deck::Deck()
     }
 }
 
+Deck::Deck(vector<Card> cards) :
+cards{cards}
+{
+}
+
 Card Deck::draw() {
     if (empty()) {
         throw runtime_error("Attempted to draw from an empty deck");

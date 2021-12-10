@@ -22,10 +22,16 @@ class Deck {
         static constexpr int NUMBER_OF_CARDS_IN_A_FULL_DECK = 52;
 
         /**
-         * @brief Construct a new Deck object
+         * @brief Construct a new Deck object. 
+         * The deck starts off in order, so shuffle it.
          */
         Deck();
 
+        /**
+         * @brief Construct a new  Deck object from supplied cards
+         * @param cards 
+         */
+        Deck::Deck(std::vector<Card> cards);
         /**
          * @brief Shuffle the deck using the Fisher-Yates method
          * 
