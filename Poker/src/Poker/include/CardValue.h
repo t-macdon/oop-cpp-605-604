@@ -9,6 +9,7 @@
 #ifndef CARD_VALUE_H
 #define CARD_VALUE_H
 
+#include <array>
 #include <string>
 
 /**
@@ -36,6 +37,23 @@ class CardValue {
             KING,
             NONE
         };
+
+        inline static constexpr std::array<Value, 13> ALL_VALUES {
+            ACE,
+            TWO,
+            THREE,
+            FOUR,
+            FIVE,
+            SIX,
+            SEVEN,
+            EIGHT,
+            NINE,
+            TEN,
+            JACK,
+            QUEEN,
+            KING,
+        };
+
 
         /**
          * @brief Construct a new Card Value object

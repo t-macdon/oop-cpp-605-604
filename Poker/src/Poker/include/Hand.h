@@ -58,6 +58,13 @@ public:
      */
     std::string toString() const;
 
+
+    /**
+     * @brief Returns the size of this hand
+     * @return int 
+     */
+    inline int size() const { return handVector.size(); }
+
     /**
      * @brief Add a card to this hand
      * 

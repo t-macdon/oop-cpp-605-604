@@ -10,6 +10,7 @@
 #define CARD_H
 
 #include <ostream>
+#include <array>
 #include <string>
 #include "CardValue.h"
 

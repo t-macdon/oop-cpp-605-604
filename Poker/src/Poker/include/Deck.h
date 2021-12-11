@@ -31,7 +31,7 @@ class Deck {
          * @brief Construct a new  Deck object from supplied cards
          * @param cards 
          */
-        Deck::Deck(std::vector<Card> cards);
+        Deck(std::vector<Card> cards);
         /**
          * @brief Shuffle the deck using the Fisher-Yates method
          * 
