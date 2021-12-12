@@ -15,10 +15,10 @@ float HumanPlayer::bet(float ante) {
     // Prompt the user for how much they'd like to bet,
     // ensuring it's within their bettable limit
     float betAmt = -1;
-    while (betAmt <= ante || betAmt > getMoney()) {
+    while (betAmt < ante || betAmt > getMoney()) {
         cout << "Bet amount: ( "
-            << ante << " - "
-            << getMoney() << " ): ";
+            << "$" << ante << " - "
+            << "$" << getMoney() << " ): $";
         cin >> betAmt;
 
         // Round off to nearest penny

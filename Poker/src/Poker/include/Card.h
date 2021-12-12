@@ -30,6 +30,9 @@ class Card {
             SPADE,
         };
 
+        /**
+         * @brief All suit options, useful for iterators
+         */
         inline static constexpr std::array<Suit, 4> ALL_SUITS {
             Suit::HEART,
             Suit::DIAMOND,

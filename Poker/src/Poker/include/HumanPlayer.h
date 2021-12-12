@@ -13,10 +13,27 @@
 #include <string>
 #include "Player.h"
 
+/**
+ * @brief A Human-controlled poker player
+ * 
+ */
 class HumanPlayer : public Player {
-    public:
-        HumanPlayer(std::string name, float money);
-        virtual float bet(float ante) final;
+public:
+    /**
+     * @brief Construct a new Human Player object
+     * 
+     * @param name Name of this player
+     * @param money Amount of money this player starts with
+     */
+    HumanPlayer(std::string name, float money);
+
+    /**
+     * @brief Prompts the human-controller how much they'd like to bet
+     * 
+     * @param ante Minimum bet
+     * @return float Amount bet
+     */
+    virtual float bet(float ante) final;
 };
 
 #endif // _HUMAN_PLAYER_H_

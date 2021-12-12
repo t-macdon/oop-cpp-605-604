@@ -13,10 +13,26 @@
 #include <string>
 #include "Player.h"
 
+/**
+ * @brief A Computer-controlled poker player
+ */
 class CPUPlayer : public Player {
-    public:
-        CPUPlayer(std::string name, float money);
-        virtual float bet(float ante) final;
+public:
+    /**
+     * @brief Construct a new CPUPlayer object
+     * 
+     * @param name Name of this player
+     * @param money How much money does this player have
+     */
+    CPUPlayer(std::string name, float money);
+
+    /**
+     * @brief The default CPU bet implementation is to bet half of its money
+     * 
+     * @param ante Minimum bet to make
+     * @return float Amount of money betted (or 0 if they cannot bet)
+     */
+    virtual float bet(float ante) final;
 };
 
 #endif // _CPU_PLAYER_H_

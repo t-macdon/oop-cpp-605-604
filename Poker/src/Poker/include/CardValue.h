@@ -38,6 +38,9 @@ class CardValue {
             NONE
         };
 
+        /**
+         * @brief All valid Value options, useful for iterators
+         */
         inline static constexpr std::array<Value, 13> ALL_VALUES {
             ACE,
             TWO,

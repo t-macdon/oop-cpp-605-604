@@ -50,6 +50,10 @@ public:
      * @brief Construct a new Hand object
      */
     Hand();
+
+    /**
+     * @brief Public constant to track the size of a player's hand
+     */
     static const int HAND_SIZE = 5;
 
     /**
