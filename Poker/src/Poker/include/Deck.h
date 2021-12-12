@@ -77,6 +77,11 @@ class Deck {
         inline bool empty() const { return size() == 0; }
 
     private:
+
+        /**
+         * @brief List of Card objects
+         * 
+         */
         std::vector<Card> cards;
 };
 
