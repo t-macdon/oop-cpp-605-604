@@ -32,12 +32,18 @@ class Deck {
          * @param cards 
          */
         Deck(std::vector<Card> cards);
+
         /**
          * @brief Shuffle the deck using the Fisher-Yates method
          * 
          * @param seed Seed to use for shuffle
          */
         void shuffle(int seed);
+
+        /**
+         * @brief Shuffle the deck with a random seed
+         */
+        void shuffle();
 
         /**
          * @brief Draw a card from the deck (removes from the deck)

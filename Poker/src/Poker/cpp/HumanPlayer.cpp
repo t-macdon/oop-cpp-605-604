@@ -11,12 +11,13 @@ HumanPlayer::HumanPlayer(string name, float money) :
     ;
 }
 
-float HumanPlayer::bet() {
+float HumanPlayer::bet(float ante) {
     // Prompt the user for how much they'd like to bet,
     // ensuring it's within their bettable limit
     float betAmt = -1;
-    while (betAmt <= 0 || betAmt > getMoney()) {
-        cout << "Bet amount: (0.00 - "
+    while (betAmt <= ante || betAmt > getMoney()) {
+        cout << "Bet amount: ( "
+            << ante << " - "
             << getMoney() << " ): ";
         cin >> betAmt;
 

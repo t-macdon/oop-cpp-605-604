@@ -16,7 +16,7 @@
 class CPUPlayer : public Player {
     public:
         CPUPlayer(std::string name, float money);
-        virtual float bet() final;
+        virtual float bet(float ante) final;
 };
 
 #endif // _CPU_PLAYER_H_

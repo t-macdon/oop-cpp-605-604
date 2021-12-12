@@ -22,7 +22,7 @@ public:
     const Hand &getHand() const { return hand; }
     int handSize() const { return hand.size(); }
 
-    virtual float bet() = 0;
+    virtual float bet(float ante) = 0;
 
     float getMoney() const {return money;}
     std::string getName() const {return name;}

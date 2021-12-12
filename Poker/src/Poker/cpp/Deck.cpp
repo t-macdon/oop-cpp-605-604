@@ -1,6 +1,7 @@
 #include <vector>
 #include <exception>
 #include <random>
+#include <time.h>
 
 #include "Deck.h"
 #include "Card.h"
@@ -56,4 +57,8 @@ void Deck::shuffle(int seed) {
         int j = distribution(engine);
         swap(cards[i], cards[j]);
     }
+}
+
+void Deck::shuffle() {
+    shuffle(time(nullptr));
 }

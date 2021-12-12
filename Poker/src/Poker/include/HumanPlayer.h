@@ -16,7 +16,7 @@
 class HumanPlayer : public Player {
     public:
         HumanPlayer(std::string name, float money);
-        virtual float bet() final;
+        virtual float bet(float ante) final;
 };
 
 #endif // _HUMAN_PLAYER_H_

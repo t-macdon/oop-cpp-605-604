@@ -18,9 +18,16 @@ CPUPlayer::CPUPlayer(string name, float money) :
     ;
 }
 
-float CPUPlayer::bet() {
+float CPUPlayer::bet(float ante) {
     // CPU Player always bets 1/2 of its money, to the nearest dollar
     float half = round(this->getMoney() / 2);
+    if (half < ante) {
+        if (getMoney() < ante) {
+            return 0;
+        } else {
+            return ante;
+        }
+    }
     this->removeMoney(half);
     return half;
 }
