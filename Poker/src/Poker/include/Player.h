@@ -29,9 +29,9 @@ public:
     Player(std::string name, float money);
 
     /**
-     * @brief Add a card to the hand of this player
+     * @brief Puts the card into the Player's hand
      * 
-     * @param card 
+     * @param card Card from Deck to put in Hand
      */
     void addCardToHand(Card &card);
 
@@ -90,8 +90,23 @@ public:
     void removeMoney(float money) { this->money -= money; }
 
 private:
+
+    /**
+     * @brief This Player's hand
+     * 
+     */
     Hand hand;
+
+    /**
+     * @brief This Player's money
+     * 
+     */
     float money;
+
+    /**
+     * @brief This Player's name
+     * 
+     */
     std::string name;
 };
 

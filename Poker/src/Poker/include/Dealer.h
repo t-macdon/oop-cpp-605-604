@@ -129,7 +129,7 @@ private:
     float ante;
 
     /**
-     * @brief Vector of all players playing
+     * @brief List of structs containing Player and Bet combinations
      */
     std::vector<PlayerAndBet> players;
 
