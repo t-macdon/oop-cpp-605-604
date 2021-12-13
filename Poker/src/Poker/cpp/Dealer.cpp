@@ -81,10 +81,11 @@ void Dealer::promptForPlayers()
     {
         cout << "PLAYER " << i + 1 << endl;
         char sel = '\0';
-        while (tolower(sel) != 'n' && tolower(sel) != 'y')
+        while (sel != 'n' && sel != 'y')
         {
             cout << "\tIs player " << i + 1 << " a computer? (Y/N): ";
             cin >> sel;
+            sel = tolower(sel);
         }
 
         string name;
